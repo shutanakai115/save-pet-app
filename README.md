@@ -94,9 +94,3 @@ docker compose exec db psql -U postgres -d savingpet
 ```bash
 cp .env.example .env
 ```
-
-## プロジェクト目的
-
-- Next.js 15の新機能キャッチアップ
-- Go言語の学習
-- データベース設計の実践
