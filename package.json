@@ -1,0 +1,19 @@
+{
+  "name": "saving-pet-app",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "pnpm --parallel --filter \"@saving-pet/*\" dev",
+    "dev:web": "pnpm --filter @saving-pet/web dev",
+    "dev:api": "cd apps/api && go run .",
+    "build": "pnpm -r build",
+    "build:web": "pnpm --filter @saving-pet/web build",
+    "build:api": "cd apps/api && go build -o bin/api .",
+    "lint": "pnpm -r lint",
+    "format": "pnpm -r format",
+    "test": "pnpm -r test"
+  },
+  "devDependencies": {
+    "turbo": "^2.5.0"
+  }
+}
