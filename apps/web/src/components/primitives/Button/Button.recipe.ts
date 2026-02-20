@@ -96,6 +96,37 @@ export const buttonRecipe = cva({
           transform: "scale(0.98)",
         },
       },
+      cta: {
+        borderWidth: "2px",
+        borderColor: "rgba(255,255,255,0.3)",
+        backgroundColor: "#FFC107",
+        color: "white",
+        boxShadow: "0px 6px 0px rgba(212,160,23,1)",
+        position: "relative",
+        overflow: "hidden",
+        fontWeight: "800",
+        letterSpacing: "0.025em",
+        lineHeight: "1.4",
+        whiteSpace: "nowrap",
+        _before: {
+          content: "\"\"",
+          position: "absolute",
+          insetX: "0.5",
+          top: "0.5",
+          height: "16",
+          borderTopLeftRadius: "full",
+          borderTopRightRadius: "full",
+          background: "linear-gradient(180deg, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 100%)",
+          pointerEvents: "none",
+        },
+        _hover: {
+          backgroundColor: "#FFB300",
+        },
+        _active: {
+          transform: "translateY(2px)",
+          boxShadow: "0px 4px 0px rgba(212,160,23,1)",
+        },
+      },
     },
     size: {
       xs: {
@@ -164,6 +195,11 @@ export const buttonRecipe = cva({
       variant: "danger",
       disabled: true,
       css: { backgroundColor: "neutral.200", color: "neutral.500" },
+    },
+    {
+      variant: "cta",
+      disabled: true,
+      css: { backgroundColor: "neutral.200", color: "neutral.500", boxShadow: "none" },
     },
   ],
   defaultVariants: {
