@@ -9,7 +9,7 @@ import {
   bottomNavIconWrapRecipe,
   bottomNavLabelRecipe,
   bottomNavLinkRecipe,
-} from "./BottomNav.recipe";
+} from "./BottomNavLink.recipe";
 
 interface BottomNavLinkProps {
   href: string;
