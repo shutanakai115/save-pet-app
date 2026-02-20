@@ -39,3 +39,8 @@ docker-compose.override.yml
 
 # Misc
 .cache/
+
+# Cursor
+.cursor/*
+!.cursor/rules/
+!.cursor/skills/
