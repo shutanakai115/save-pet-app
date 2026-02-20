@@ -1,0 +1,19 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "plugins": ["eslint", "typescript", "unicorn", "oxc", "nextjs", "react"],
+  "settings": {
+    "next": {
+      "rootDir": "."
+    }
+  },
+  "ignorePatterns": ["node_modules", ".next", "dist", "build", "styled-system", "storybook-static"],
+  "categories": {
+    "correctness": "error",
+    "suspicious": "error"
+  },
+  "rules": {
+    "no-unused-vars": "error",
+    "typescript/no-explicit-any": "error",
+    "react-in-jsx-scope": "off"
+  }
+}

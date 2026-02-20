@@ -1,5 +1,6 @@
-import { Select } from "./primitives";
 import { css } from "$styled-system/css";
+
+import { Select } from "./primitives";
 
 const fruits = [
   { label: "Apple", value: "apple" },

@@ -5,7 +5,7 @@ A modern React template with Next.js, ArkUI, and PandaCSS for building design sy
 ## Tech Stack
 
 - **Next.js 15** - React framework with App Router
-- **ArkUI** - Headless UI components  
+- **ArkUI** - Headless UI components
 - **PandaCSS** - Build-time CSS-in-JS with design tokens
 - **TypeScript** - Type safety
 - **Storybook** - Component development
@@ -65,9 +65,9 @@ panda.config.ts        # PandaCSS configuration
 import { Button, Select } from "@/components/primitives";
 
 // Use shorthand props (mt, px, py, etc.)
-<Button 
-  variant="primary" 
-  mt="lg" 
+<Button
+  variant="primary"
+  mt="lg"
   px={4}
   onClick={() => {}}
 >

@@ -10,6 +10,8 @@
     "dev": "pnpm --parallel --filter \"@saving-pet/*\" dev",
     "dev:web": "pnpm --filter @saving-pet/web dev",
     "dev:api": "cd apps/api && go run .",
+    "storybook": "pnpm --filter @saving-pet/web storybook",
+    "build:storybook": "pnpm --filter @saving-pet/web build-storybook",
     "build": "pnpm -r build",
     "build:web": "pnpm --filter @saving-pet/web build",
     "build:api": "cd apps/api && go build -o bin/api .",
