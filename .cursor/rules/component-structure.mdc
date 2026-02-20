@@ -1,0 +1,44 @@
+---
+description: コンポーネント構造の分割ルール。1コンポーネント1ファイル+1recipeを徹底し、過度でない階層化を維持する。
+globs: apps/web/src/components/**/*.ts, apps/web/src/components/**/*.tsx, apps/web/src/app/(main)/**/*.tsx
+alwaysApply: false
+---
+
+# Component Structure
+
+## 目的
+
+- `.recipe.ts` の肥大化を防ぎ、責務をコンポーネント単位に分割する
+- 可読性と変更容易性を維持するため、必要最小限のディレクトリ階層を使う
+
+## 基本ルール
+
+- 1コンポーネントにつき、実装ファイルは1つ (`ComponentName.tsx`)
+- 1コンポーネントにつき、スタイル定義は1つ (`ComponentName.recipe.ts`)
+- 複数コンポーネントのスタイルを1つの `.recipe.ts` にまとめない
+- コンポーネントに階層がある場合は、`<Feature>/<Component>/` で分割する
+- 各階層に `index.ts` を置き、import は barrel 経由を優先する
+
+## 推奨構成
+
+```text
+features/home/
+  HomePage/
+    HomePage.recipe.ts
+    index.ts
+  HomeHeader/
+    HomeHeader.tsx
+    HomeHeader.recipe.ts
+    index.ts
+  SavingsHero/
+    SavingsHero.tsx
+    SavingsHero.recipe.ts
+    index.ts
+  index.ts
+```
+
+## 運用指針
+
+- 既存の巨大 `.recipe.ts` を編集するときは、対象コンポーネント単位で分割を優先する
+- 分割時に命名は `ComponentName.tsx` / `ComponentName.recipe.ts` に統一する
+- 深すぎる階層は作らず、2〜3階層程度に収める
