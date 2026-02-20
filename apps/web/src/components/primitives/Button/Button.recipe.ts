@@ -123,8 +123,8 @@ export const buttonRecipe = cva({
           backgroundColor: "#FFB300",
         },
         _active: {
-          transform: "translateY(2px)",
-          boxShadow: "0px 4px 0px rgba(212,160,23,1)",
+          transform: "translateY(4px) scale(0.97)",
+          boxShadow: "0px 2px 0px rgba(212,160,23,1)",
         },
       },
     },

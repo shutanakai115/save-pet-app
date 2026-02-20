@@ -1,4 +1,4 @@
-import { LinkButton } from "@/components/primitives";
+import { SavingsEntryTrigger } from "../SavingsEntryDrawer";
 
 import {
   piggyBankCircleRecipe,
@@ -63,9 +63,7 @@ export function SavingsHero({ totalAmount, goalAmount }: SavingsHeroProps) {
         <span className={piggyBankShadowRecipe()} />
       </div>
 
-      <LinkButton href="/saving" variant="cta" size="xl" fullWidth>
-        貯金する！
-      </LinkButton>
+      <SavingsEntryTrigger currentTotalAmount={totalAmount} />
     </section>
   );
 }

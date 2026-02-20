@@ -16,17 +16,22 @@ export const stepIndicatorItemRecipe = cva({
   base: {
     height: "2",
     borderRadius: "full",
-    transition: "all 0.18s ease-in-out",
+    transformOrigin: "center",
+    transition: "width 220ms ease, background-color 220ms ease, transform 220ms ease, box-shadow 220ms ease",
   },
   variants: {
     active: {
       true: {
         width: "6",
         backgroundColor: "primary.500",
+        transform: "scale(1)",
+        boxShadow: "0 0 0 4px rgba(245,183,0,0.18)",
       },
       false: {
         width: "2",
         backgroundColor: "secondary.300",
+        transform: "scale(0.92)",
+        boxShadow: "none",
       },
     },
   },

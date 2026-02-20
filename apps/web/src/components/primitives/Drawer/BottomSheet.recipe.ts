@@ -26,8 +26,6 @@ export const bottomSheetSlotRecipe = sva({
       borderTopLeftRadius: "3xl",
       borderTopRightRadius: "3xl",
       backgroundColor: "white",
-      border: "1px solid",
-      borderColor: "border.DEFAULT",
       paddingX: 5,
       paddingTop: 4,
       paddingBottom: "calc(env(safe-area-inset-bottom, 0px) + 16px)",
