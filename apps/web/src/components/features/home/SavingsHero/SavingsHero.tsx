@@ -14,7 +14,7 @@ import {
   savingsProgressMetaRecipe,
   savingsProgressRecipe,
   savingsProgressTrackRecipe,
-} from "./HomePage.recipe";
+} from "./SavingsHero.recipe";
 
 interface SavingsHeroProps {
   totalAmount: number;

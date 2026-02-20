@@ -8,7 +8,7 @@ import {
   recordDescriptionRecipe,
   recordListRecipe,
   recordsPanelRecipe,
-} from "./HomePage.recipe";
+} from "./RecentRecords.recipe";
 
 export interface RecentRecordItem {
   id: string;

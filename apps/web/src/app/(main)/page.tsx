@@ -3,7 +3,7 @@ import {
   homeDecorativeCircleRecipe,
   homeDecorativeLayerRecipe,
   homePageRootRecipe,
-} from "@/components/features/home/HomePage.recipe";
+} from "@/components/features/home";
 
 const sampleData = {
   totalAmount: 12500,
