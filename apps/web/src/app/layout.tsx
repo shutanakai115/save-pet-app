@@ -35,8 +35,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ja">
-      <body className={`${mPlusRounded1c.variable} ${inter.variable}`}>{children}</body>
+    <html lang="ja" className={`${mPlusRounded1c.variable} ${inter.variable}`}>
+      <body>{children}</body>
     </html>
   );
 }

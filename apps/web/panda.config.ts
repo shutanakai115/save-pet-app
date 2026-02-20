@@ -10,6 +10,12 @@ export default defineConfig({
   // Files to exclude
   exclude: [],
 
+  globalCss: {
+    "html, :host": {
+      fontFamily: "sans",
+    },
+  },
+
   // Responsive breakpoints (mobile-first)
   theme: {
     extend: {
@@ -121,7 +127,7 @@ export default defineConfig({
         fonts: {
           sans: {
             value:
-              "Inter, var(--font-m-plus-rounded-1c), 'M PLUS Rounded 1c', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Hiragino Kaku Gothic ProN', 'ヒラギノ角ゴ ProN W3', Meiryo, sans-serif",
+              "var(--font-inter), var(--font-m-plus-rounded-1c), 'M PLUS Rounded 1c', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Hiragino Kaku Gothic ProN', 'ヒラギノ角ゴ ProN W3', Meiryo, sans-serif",
           },
           mono: {
             value: "'JetBrains Mono', 'SF Mono', Consolas, 'Monaco', 'Courier New', monospace",
