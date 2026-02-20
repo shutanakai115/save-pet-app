@@ -4,7 +4,9 @@
   "private": true,
   "scripts": {
     "prepare": "panda codegen",
-    "dev": "rm -rf .next && next dev --turbopack",
+    "dev": "next dev --turbopack",
+    "clean": "rm -rf .next",
+    "dev:clean": "pnpm clean && pnpm dev",
     "build": "next build --turbopack",
     "start": "next start",
     "lint": "oxlint .",
@@ -15,6 +17,7 @@
   },
   "dependencies": {
     "@base-ui/react": "^1.2.0",
+    "lucide-react": "^0.575.0",
     "next": "15.5.12",
     "react": "19.2.4",
     "react-dom": "19.2.4"

@@ -1,11 +1,8 @@
-"use client";
-
 import type { ReactNode } from "react";
 
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-
-import { bottomNavLinkRecipe, bottomNavListClass, bottomNavRootClass } from "./BottomNav.recipe";
+import { History, House, Settings, Target } from "lucide-react";
+import { bottomNavListRecipe, bottomNavRootRecipe } from "./BottomNav.recipe";
+import { BottomNavLink } from "./BottomNavLink";
 
 export interface BottomNavItem {
   label: string;
@@ -19,35 +16,21 @@ export interface BottomNavProps {
 }
 
 const defaultItems: BottomNavItem[] = [
-  { label: "ホーム", href: "/", icon: "🏠" },
-  { label: "履歴", href: "/history", icon: "🧾" },
-  { label: "目標", href: "/goal", icon: "🎯" },
-  { label: "設定", href: "/settings", icon: "⚙️" },
+  { label: "ホーム", href: "/", icon: <House size={20} /> },
+  { label: "履歴", href: "/history", icon: <History size={20} /> },
+  { label: "目標", href: "/goal", icon: <Target size={20} /> },
+  { label: "設定", href: "/settings", icon: <Settings size={20} /> },
 ];
 
 export function BottomNav({ items = defaultItems, currentPath }: BottomNavProps) {
-  const pathname = usePathname();
-  const activePath = currentPath ?? pathname ?? "/";
-
   return (
-    <nav aria-label="Bottom navigation" className={bottomNavRootClass}>
-      <ul className={bottomNavListClass}>
-        {items.map((item) => {
-          const active = item.href === "/" ? activePath === "/" : activePath.startsWith(item.href);
-
-          return (
-            <li key={item.href}>
-              <Link
-                href={item.href}
-                className={bottomNavLinkRecipe({ active })}
-                aria-current={active ? "page" : undefined}
-              >
-                <span aria-hidden="true">{item.icon}</span>
-                <span>{item.label}</span>
-              </Link>
-            </li>
-          );
-        })}
+    <nav aria-label="Bottom navigation" className={bottomNavRootRecipe()}>
+      <ul className={bottomNavListRecipe()}>
+        {items.map((item) => (
+          <li key={item.href}>
+            <BottomNavLink href={item.href} icon={item.icon} label={item.label} currentPath={currentPath} />
+          </li>
+        ))}
       </ul>
     </nav>
   );
