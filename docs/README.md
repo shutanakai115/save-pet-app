@@ -9,7 +9,8 @@ docs/
 ├── requirements/          # 要件定義
 │   └── mvp.md            # MVP要件定義
 ├── design/               # 設計ドキュメント
-│   ├── screen-design.md  # 画面設計
+│   ├── DESIGN.md         # デザインシステム（ソースオブトゥルース）
+│   ├── screen-design.md  # 画面設計・ワイヤーフレーム（7画面: ホーム/モーダル3ステップ/履歴/目標/設定）
 │   ├── api-design.md     # API設計（予定）
 │   └── database-design.md # DB設計（予定）
 ├── decisions/            # ADR (Architecture Decision Records)
@@ -39,7 +40,9 @@ docs/
 1. **Phase 1: ドキュメント整備** ✅
    - 要件定義、ADR、画面設計
 
-2. **Phase 2: 画面実装**
+2. **Phase 2: デザイン・画面実装** 🚧
+   - デザインシステム整備（DESIGN.md）
+   - Stitch によるUIデザイン生成
    - UI コンポーネント実装
 
 3. **Phase 3: API設計・実装**
