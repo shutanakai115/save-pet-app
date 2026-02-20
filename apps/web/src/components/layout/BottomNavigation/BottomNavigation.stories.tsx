@@ -2,16 +2,16 @@ import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 
 import { css } from "$styled-system/css";
 
-import { BottomNav } from "./BottomNav";
+import { BottomNavigation } from "./BottomNavigation";
 
 const meta = {
-  title: "Primitives/BottomNav",
-  component: BottomNav,
+  title: "Layout/BottomNavigation",
+  component: BottomNavigation,
   tags: ["autodocs"],
   parameters: {
     layout: "fullscreen",
   },
-} satisfies Meta<typeof BottomNav>;
+} satisfies Meta<typeof BottomNavigation>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
@@ -19,7 +19,7 @@ type Story = StoryObj<typeof meta>;
 export const HomeActive: Story = {
   render: () => (
     <div className={css({ minH: "96", backgroundColor: "bg.subtle" })}>
-      <BottomNav currentPath="/" />
+      <BottomNavigation currentPath="/" />
     </div>
   ),
 };
@@ -27,7 +27,7 @@ export const HomeActive: Story = {
 export const GoalActive: Story = {
   render: () => (
     <div className={css({ minH: "96", backgroundColor: "bg.subtle" })}>
-      <BottomNav currentPath="/goal" />
+      <BottomNavigation currentPath="/goal" />
     </div>
   ),
 };

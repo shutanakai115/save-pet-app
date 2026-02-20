@@ -1,6 +1,6 @@
 import { cva } from "$styled-system/css";
 
-export const bottomNavRootRecipe = cva({
+export const bottomNavigationRootRecipe = cva({
   base: {
     position: "fixed",
     left: 0,
@@ -16,7 +16,7 @@ export const bottomNavRootRecipe = cva({
   },
 });
 
-export const bottomNavListRecipe = cva({
+export const bottomNavigationListRecipe = cva({
   base: {
     margin: 0,
     padding: 0,

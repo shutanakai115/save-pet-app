@@ -1,6 +1,6 @@
 import { cva } from "$styled-system/css";
 
-export const bottomNavLinkRecipe = cva({
+export const bottomNavigationLinkRecipe = cva({
   base: {
     display: "flex",
     flexDirection: "column",
@@ -26,7 +26,7 @@ export const bottomNavLinkRecipe = cva({
   },
 });
 
-export const bottomNavIconWrapRecipe = cva({
+export const bottomNavigationIconWrapRecipe = cva({
   base: {
     display: "flex",
     alignItems: "center",
@@ -49,7 +49,7 @@ export const bottomNavIconWrapRecipe = cva({
   },
 });
 
-export const bottomNavLabelRecipe = cva({
+export const bottomNavigationLabelRecipe = cva({
   base: {
     marginTop: "1",
     fontSize: "10px",
