@@ -1,0 +1,34 @@
+---
+description: Next.js Server/Client Component の境界設計原則。コンポーネント実装・レビュー時に適用。
+globs: apps/web/src/**/*.ts, apps/web/src/**/*.tsx
+alwaysApply: false
+---
+
+# Server/Client Component 境界
+
+## 原則
+
+- コンポーネントはデフォルトで Server Component として作成する
+- "use client" は以下のケースにのみ付与する:
+  - React hooks (useState, useEffect, usePathname 等) を使用
+  - ブラウザ API を使用
+  - クライアント専用ライブラリ (Base UI 等) をインポート
+  - onClick 等のイベントハンドラを受け取る前提のインタラクティブ要素
+- recipe ファイル (*.recipe.ts) には絶対に "use client" を付けない
+
+## 階層化による最小化
+
+静的な構造部分と Client ロジックが混在する場合、co-located で分割し "use client" 境界をリーフに押し下げる。
+
+```
+BottomNav/
+  BottomNav.tsx      ← Server (nav/ul コンテナ)
+  BottomNavLink.tsx  ← Client (usePathname で active 判定)
+```
+
+## 判断フロー
+
+1. hooks / browser API / client lib を使うか → "use client"
+2. イベントハンドラを受け取る前提か → "use client"
+3. どちらにも該当しない → Server Component
+4. 一部だけ該当する → co-located 分割を検討
