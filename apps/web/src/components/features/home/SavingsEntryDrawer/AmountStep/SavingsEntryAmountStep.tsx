@@ -13,7 +13,7 @@ import {
   savingsEntryStepHeaderRecipe,
   savingsEntryStepRecipe,
   savingsEntryStepTitleRecipe,
-} from "./SavingsEntryDetailsStep.recipe";
+} from "../DetailsStep/SavingsEntryDetailsStep.recipe";
 
 interface SavingsEntryAmountStepProps {
   amount: number | null;

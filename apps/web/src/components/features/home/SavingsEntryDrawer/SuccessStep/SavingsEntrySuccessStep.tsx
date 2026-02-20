@@ -12,9 +12,7 @@ import {
   savingsEntrySuccessPigWrapRecipe,
   savingsEntrySuccessTotalRecipe,
 } from "./SavingsEntrySuccessStep.recipe";
-import {
-  savingsEntryStepRecipe,
-} from "./SavingsEntryDetailsStep.recipe";
+import { savingsEntryStepRecipe } from "../DetailsStep/SavingsEntryDetailsStep.recipe";
 
 interface SavingsEntrySuccessStepProps {
   amount: number;

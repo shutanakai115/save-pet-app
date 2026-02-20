@@ -5,10 +5,10 @@ import { useRef, useState } from "react";
 
 import { BottomSheet, Button, StepIndicator } from "@/components/primitives";
 
+import { SavingsEntryAmountStep } from "../AmountStep";
+import { SavingsEntryDetailsStep } from "../DetailsStep";
+import { SavingsEntrySuccessStep } from "../SuccessStep";
 import { savingsEntryDrawerContentRecipe } from "./SavingsEntryDrawer.recipe";
-import { SavingsEntryAmountStep } from "./SavingsEntryAmountStep";
-import { SavingsEntryDetailsStep } from "./SavingsEntryDetailsStep";
-import { SavingsEntrySuccessStep } from "./SavingsEntrySuccessStep";
 
 type SavingsEntryStep = "details" | "amount" | "success";
 type TransitionDirection = 1 | -1;
