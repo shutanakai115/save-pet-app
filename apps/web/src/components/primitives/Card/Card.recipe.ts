@@ -1,5 +1,3 @@
-"use client";
-
 import { cva } from "$styled-system/css";
 
 export const cardRecipe = cva({

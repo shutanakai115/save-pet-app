@@ -3,10 +3,10 @@
 import { Progress } from "@base-ui/react/progress";
 
 import {
-  progressIndicatorClass,
-  progressLabelClass,
-  progressRootClass,
-  progressTrackClass,
+  progressIndicatorRecipe,
+  progressLabelRecipe,
+  progressRootRecipe,
+  progressTrackRecipe,
 } from "./ProgressBar.recipe";
 
 export interface ProgressBarProps {
@@ -18,11 +18,11 @@ export interface ProgressBarProps {
 
 export function ProgressBar({ value, max = 100, label, showValue = true }: ProgressBarProps) {
   return (
-    <Progress.Root value={value} max={max} className={progressRootClass}>
-      {label ? <Progress.Label className={progressLabelClass}>{label}</Progress.Label> : <span />}
-      {showValue && <Progress.Value className={progressLabelClass} />}
-      <Progress.Track className={progressTrackClass}>
-        <Progress.Indicator className={progressIndicatorClass} />
+    <Progress.Root value={value} max={max} className={progressRootRecipe()}>
+      {label ? <Progress.Label className={progressLabelRecipe()}>{label}</Progress.Label> : <span />}
+      {showValue && <Progress.Value className={progressLabelRecipe()} />}
+      <Progress.Track className={progressTrackRecipe()}>
+        <Progress.Indicator className={progressIndicatorRecipe()} />
       </Progress.Track>
     </Progress.Root>
   );

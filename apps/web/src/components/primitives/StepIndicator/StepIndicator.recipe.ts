@@ -1,15 +1,15 @@
-"use client";
+import { cva } from "$styled-system/css";
 
-import { css, cva } from "$styled-system/css";
-
-export const stepIndicatorRootClass = css({
-  display: "flex",
-  gap: 2,
-  alignItems: "center",
-  justifyContent: "center",
-  listStyle: "none",
-  margin: 0,
-  padding: 0,
+export const stepIndicatorRootRecipe = cva({
+  base: {
+    display: "flex",
+    gap: 2,
+    alignItems: "center",
+    justifyContent: "center",
+    listStyle: "none",
+    margin: 0,
+    padding: 0,
+  },
 });
 
 export const stepIndicatorItemRecipe = cva({

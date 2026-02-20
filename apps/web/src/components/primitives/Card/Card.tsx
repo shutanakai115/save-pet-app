@@ -1,5 +1,3 @@
-"use client";
-
 import type { ComponentPropsWithoutRef } from "react";
 
 import { cx } from "$styled-system/css";

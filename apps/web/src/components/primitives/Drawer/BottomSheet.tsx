@@ -4,14 +4,7 @@ import type { ReactNode } from "react";
 
 import { DrawerPreview as Drawer } from "@base-ui/react/drawer";
 
-import {
-  bottomSheetBackdropClass,
-  bottomSheetDescriptionClass,
-  bottomSheetHandleClass,
-  bottomSheetPopupClass,
-  bottomSheetTitleClass,
-  bottomSheetViewportClass,
-} from "./BottomSheet.recipe";
+import { bottomSheetSlotRecipe } from "./BottomSheet.recipe";
 
 export interface BottomSheetProps {
   open: boolean;
@@ -28,18 +21,20 @@ export function BottomSheet({
   description,
   children,
 }: BottomSheetProps) {
+  const classes = bottomSheetSlotRecipe();
+
   return (
     <Drawer.Root open={open} onOpenChange={onOpenChange} swipeDirection="down">
       <Drawer.Portal>
-        <Drawer.Backdrop className={bottomSheetBackdropClass} />
-        <Drawer.Viewport className={bottomSheetViewportClass}>
-          <Drawer.Popup className={bottomSheetPopupClass}>
-            <div className={bottomSheetHandleClass} />
+        <Drawer.Backdrop className={classes.backdrop} />
+        <Drawer.Viewport className={classes.viewport}>
+          <Drawer.Popup className={classes.popup}>
+            <div className={classes.handle} />
 
             <Drawer.Content>
-              {title && <Drawer.Title className={bottomSheetTitleClass}>{title}</Drawer.Title>}
+              {title && <Drawer.Title className={classes.title}>{title}</Drawer.Title>}
               {description && (
-                <Drawer.Description className={bottomSheetDescriptionClass}>
+                <Drawer.Description className={classes.description}>
                   {description}
                 </Drawer.Description>
               )}

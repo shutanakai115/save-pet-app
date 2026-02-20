@@ -1,8 +1,10 @@
+"use client";
+
 import { cx } from "$styled-system/css";
 import { type HTMLStyledProps, styled } from "$styled-system/jsx";
 import { forwardRef } from "react";
 
-import { buttonRecipe, buttonSectionClass, buttonSpinnerClass } from "./Button.recipe";
+import { buttonRecipe, buttonSectionRecipe, buttonSpinnerRecipe } from "./Button.recipe";
 
 export interface ButtonProps extends HTMLStyledProps<"button"> {
   /** Button variant */
@@ -57,10 +59,10 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         disabled={isDisabled}
         {...props}
       >
-        {loading && <span className={buttonSpinnerClass} />}
-        {!loading && leftSection && <span className={buttonSectionClass}>{leftSection}</span>}
-        {children && <span className={buttonSectionClass}>{children}</span>}
-        {!loading && rightSection && <span className={buttonSectionClass}>{rightSection}</span>}
+        {loading && <span className={buttonSpinnerRecipe()} />}
+        {!loading && leftSection && <span className={buttonSectionRecipe()}>{leftSection}</span>}
+        {children && <span className={buttonSectionRecipe()}>{children}</span>}
+        {!loading && rightSection && <span className={buttonSectionRecipe()}>{rightSection}</span>}
       </styled.button>
     );
   },

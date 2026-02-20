@@ -1,18 +1,20 @@
-"use client";
+import { cva } from "$styled-system/css";
 
-import { css, cva } from "$styled-system/css";
-
-export const inputFieldRootClass = css({
-  display: "flex",
-  flexDirection: "column",
-  gap: 1,
-  width: "full",
+export const inputFieldRootRecipe = cva({
+  base: {
+    display: "flex",
+    flexDirection: "column",
+    gap: 1,
+    width: "full",
+  },
 });
 
-export const inputLabelClass = css({
-  fontSize: "sm",
-  fontWeight: "medium",
-  color: "fg.DEFAULT",
+export const inputLabelRecipe = cva({
+  base: {
+    fontSize: "sm",
+    fontWeight: "medium",
+    color: "fg.DEFAULT",
+  },
 });
 
 export const inputControlRecipe = cva({
@@ -42,14 +44,18 @@ export const inputControlRecipe = cva({
   },
 });
 
-export const inputErrorClass = css({
-  marginTop: 1,
-  fontSize: "sm",
-  color: "error.700",
+export const inputErrorRecipe = cva({
+  base: {
+    marginTop: 1,
+    fontSize: "sm",
+    color: "error.700",
+  },
 });
 
-export const inputDescriptionClass = css({
-  marginTop: 1,
-  fontSize: "sm",
-  color: "fg.muted",
+export const inputDescriptionRecipe = cva({
+  base: {
+    marginTop: 1,
+    fontSize: "sm",
+    color: "fg.muted",
+  },
 });

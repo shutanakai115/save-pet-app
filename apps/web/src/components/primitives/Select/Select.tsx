@@ -3,18 +3,7 @@
 import { Field } from "@base-ui/react/field";
 import { Select as BaseSelect } from "@base-ui/react/select";
 
-import {
-  selectFieldRootClass,
-  selectIconClass,
-  selectItemClass,
-  selectItemIndicatorClass,
-  selectLabelClass,
-  selectListClass,
-  selectPopupClass,
-  selectPositionerClass,
-  selectTriggerClass,
-  selectValueClass,
-} from "./Select.recipe";
+import { selectSlotRecipe } from "./Select.recipe";
 
 export interface SelectItem {
   label: string;
@@ -29,10 +18,12 @@ export interface SelectProps {
 }
 
 export function Select({ items, label, placeholder = "Select...", onValueChange }: SelectProps) {
+  const classes = selectSlotRecipe();
+
   return (
-    <Field.Root className={selectFieldRootClass}>
+    <Field.Root className={classes.fieldRoot}>
       {label && (
-        <Field.Label nativeLabel={false} render={<div />} className={selectLabelClass}>
+        <Field.Label nativeLabel={false} render={<div />} className={classes.label}>
           {label}
         </Field.Label>
       )}
@@ -45,9 +36,9 @@ export function Select({ items, label, placeholder = "Select...", onValueChange 
           }
         }}
       >
-        <BaseSelect.Trigger className={selectTriggerClass}>
-          <BaseSelect.Value placeholder={placeholder} className={selectValueClass} />
-          <BaseSelect.Icon className={selectIconClass}>
+        <BaseSelect.Trigger className={classes.trigger}>
+          <BaseSelect.Value placeholder={placeholder} className={classes.value} />
+          <BaseSelect.Icon className={classes.icon}>
             <ChevronIcon />
           </BaseSelect.Icon>
         </BaseSelect.Trigger>
@@ -56,13 +47,13 @@ export function Select({ items, label, placeholder = "Select...", onValueChange 
           <BaseSelect.Positioner
             sideOffset={8}
             alignItemWithTrigger={false}
-            className={selectPositionerClass}
+            className={classes.positioner}
           >
-            <BaseSelect.Popup className={selectPopupClass}>
-              <BaseSelect.List className={selectListClass}>
+            <BaseSelect.Popup className={classes.popup}>
+              <BaseSelect.List className={classes.list}>
                 {items.map((item) => (
-                  <BaseSelect.Item key={item.value} value={item.value} className={selectItemClass}>
-                    <BaseSelect.ItemIndicator className={selectItemIndicatorClass}>
+                  <BaseSelect.Item key={item.value} value={item.value} className={classes.item}>
+                    <BaseSelect.ItemIndicator className={classes.itemIndicator}>
                       <CheckIcon />
                     </BaseSelect.ItemIndicator>
                     <BaseSelect.ItemText>{item.label}</BaseSelect.ItemText>

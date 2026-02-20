@@ -8,10 +8,10 @@ import { Input as BaseInput } from "@base-ui/react/input";
 
 import {
   inputControlRecipe,
-  inputDescriptionClass,
-  inputErrorClass,
-  inputFieldRootClass,
-  inputLabelClass,
+  inputDescriptionRecipe,
+  inputErrorRecipe,
+  inputFieldRootRecipe,
+  inputLabelRecipe,
 } from "./Input.recipe";
 
 export interface InputProps extends Omit<ComponentProps<typeof BaseInput>, "className"> {
@@ -30,19 +30,19 @@ export function Input({
   ...props
 }: InputProps) {
   return (
-    <Field.Root className={inputFieldRootClass}>
-      {label && <Field.Label className={inputLabelClass}>{label}</Field.Label>}
+    <Field.Root className={inputFieldRootRecipe()}>
+      {label && <Field.Label className={inputLabelRecipe()}>{label}</Field.Label>}
 
       <BaseInput required={required} className={cx(inputControlRecipe(), className)} {...props} />
 
       {errorMessage && (
-        <Field.Error match={true} className={inputErrorClass}>
+        <Field.Error match={true} className={inputErrorRecipe()}>
           {errorMessage}
         </Field.Error>
       )}
 
       {description && !errorMessage && (
-        <Field.Description className={inputDescriptionClass}>{description}</Field.Description>
+        <Field.Description className={inputDescriptionRecipe()}>{description}</Field.Description>
       )}
     </Field.Root>
   );

@@ -1,6 +1,4 @@
-"use client";
-
-import { stepIndicatorItemRecipe, stepIndicatorRootClass } from "./StepIndicator.recipe";
+import { stepIndicatorItemRecipe, stepIndicatorRootRecipe } from "./StepIndicator.recipe";
 
 export interface StepIndicatorProps {
   totalSteps: number;
@@ -11,7 +9,7 @@ export function StepIndicator({ totalSteps, currentStep }: StepIndicatorProps) {
   const steps = Array.from({ length: totalSteps }, (_, idx) => idx + 1);
 
   return (
-    <ol className={stepIndicatorRootClass} aria-label={`ステップ ${currentStep} / ${totalSteps}`}>
+    <ol className={stepIndicatorRootRecipe()} aria-label={`ステップ ${currentStep} / ${totalSteps}`}>
       {steps.map((step) => {
         const active = step === currentStep;
         return (

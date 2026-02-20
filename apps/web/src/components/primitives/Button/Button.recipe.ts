@@ -1,6 +1,4 @@
-"use client";
-
-import { css, cva } from "$styled-system/css";
+import { cva } from "$styled-system/css";
 
 export const buttonRecipe = cva({
   base: {
@@ -174,14 +172,21 @@ export const buttonRecipe = cva({
   },
 });
 
-export const buttonSectionClass = css({ display: "flex", alignItems: "center" });
+export const buttonSectionRecipe = cva({
+  base: {
+    display: "flex",
+    alignItems: "center",
+  },
+});
 
-export const buttonSpinnerClass = css({
-  display: "inline-block",
-  width: "1em",
-  height: "1em",
-  border: "2px solid currentColor",
-  borderTopColor: "transparent",
-  borderRadius: "full",
-  animation: "spin 1s linear infinite",
+export const buttonSpinnerRecipe = cva({
+  base: {
+    display: "inline-block",
+    width: "1em",
+    height: "1em",
+    border: "2px solid currentColor",
+    borderTopColor: "transparent",
+    borderRadius: "full",
+    animation: "spin 1s linear infinite",
+  },
 });
