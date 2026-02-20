@@ -135,7 +135,9 @@ export default defineConfig({
           lg: { value: "1.125rem" }, // 18px
           xl: { value: "1.25rem" }, // 20px
           "2xl": { value: "1.5rem" }, // 24px
+          "2.5xl": { value: "1.75rem" }, // 28px
           "3xl": { value: "1.875rem" }, // 30px
+          "3.5xl": { value: "3.5rem" }, // 56px
           "4xl": { value: "2.25rem" }, // 36px
           "5xl": { value: "3rem" }, // 48px
           "6xl": { value: "3.75rem" }, // 60px
