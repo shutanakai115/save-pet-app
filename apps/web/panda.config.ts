@@ -26,33 +26,47 @@ export default defineConfig({
       // ===========================================
       tokens: {
         colors: {
-          // Primary palette
+          // Primary palette (Warm Honey Gold)
           primary: {
-            50: { value: "#f0f9ff" },
-            100: { value: "#e0f2fe" },
-            200: { value: "#bae6fd" },
-            300: { value: "#7dd3fc" },
-            400: { value: "#38bdf8" },
-            500: { value: "#0ea5e9" },
-            600: { value: "#0284c7" },
-            700: { value: "#0369a1" },
-            800: { value: "#075985" },
-            900: { value: "#0c4a6e" },
-            950: { value: "#082f49" },
+            50: { value: "#fff9eb" },
+            100: { value: "#fff2cc" },
+            200: { value: "#ffe299" },
+            300: { value: "#ffd166" },
+            400: { value: "#ffc233" },
+            500: { value: "#f5b700" },
+            600: { value: "#db9e00" },
+            700: { value: "#b88300" },
+            800: { value: "#8f6500" },
+            900: { value: "#694b00" },
+            950: { value: "#3d2b00" },
           },
-          // Secondary palette (neutral)
+          // Secondary palette (Soft Coral Pink)
           secondary: {
-            50: { value: "#fafafa" },
-            100: { value: "#f4f4f5" },
-            200: { value: "#e4e4e7" },
-            300: { value: "#d4d4d8" },
-            400: { value: "#a1a1aa" },
-            500: { value: "#71717a" },
-            600: { value: "#52525b" },
-            700: { value: "#3f3f46" },
-            800: { value: "#27272a" },
-            900: { value: "#18181b" },
-            950: { value: "#09090b" },
+            50: { value: "#fff5f7" },
+            100: { value: "#ffe7ec" },
+            200: { value: "#ffcfdc" },
+            300: { value: "#ffb0c5" },
+            400: { value: "#ff8bab" },
+            500: { value: "#ff6f98" },
+            600: { value: "#f24c82" },
+            700: { value: "#cc2f66" },
+            800: { value: "#a12651" },
+            900: { value: "#781d3c" },
+            950: { value: "#4a1024" },
+          },
+          // Neutral colors (warm gray)
+          neutral: {
+            50: { value: "#fbf8f5" },
+            100: { value: "#f3ede7" },
+            200: { value: "#e5ddd5" },
+            300: { value: "#d0c3b6" },
+            400: { value: "#b2a393" },
+            500: { value: "#938271" },
+            600: { value: "#77685b" },
+            700: { value: "#5d5147" },
+            800: { value: "#443b34" },
+            900: { value: "#2f2924" },
+            950: { value: "#1d1915" },
           },
           // Green palette (base for success)
           green: {
@@ -97,6 +111,10 @@ export default defineConfig({
           white: { value: "#ffffff" },
           black: { value: "#000000" },
           transparent: { value: "transparent" },
+          bgGradient: {
+            from: { value: "#fffdf8" },
+            to: { value: "#fff3f7" },
+          },
         },
 
         // Typography tokens
@@ -306,24 +324,24 @@ export default defineConfig({
 
           // UI purpose-based colors
           fg: {
-            DEFAULT: { value: "{colors.secondary.900}" },
-            muted: { value: "{colors.secondary.500}" },
-            subtle: { value: "{colors.secondary.400}" },
+            DEFAULT: { value: "{colors.neutral.900}" },
+            muted: { value: "{colors.neutral.600}" },
+            subtle: { value: "{colors.neutral.500}" },
             inverted: { value: "{colors.white}" },
           },
           bg: {
             canvas: { value: "{colors.white}" },
             DEFAULT: { value: "{colors.white}" },
             subtle: { value: "{colors.secondary.50}" },
-            muted: { value: "{colors.secondary.100}" },
-            emphasized: { value: "{colors.secondary.200}" },
-            inverted: { value: "{colors.secondary.900}" },
+            muted: { value: "{colors.neutral.100}" },
+            emphasized: { value: "{colors.neutral.200}" },
+            inverted: { value: "{colors.neutral.900}" },
           },
           border: {
-            DEFAULT: { value: "{colors.secondary.200}" },
-            muted: { value: "{colors.secondary.100}" },
-            subtle: { value: "{colors.secondary.50}" },
-            emphasized: { value: "{colors.secondary.300}" },
+            DEFAULT: { value: "{colors.neutral.200}" },
+            muted: { value: "{colors.neutral.100}" },
+            subtle: { value: "{colors.secondary.100}" },
+            emphasized: { value: "{colors.neutral.300}" },
           },
 
           // Interactive colors
@@ -331,7 +349,7 @@ export default defineConfig({
             DEFAULT: { value: "{colors.primary.500}" },
             hover: { value: "{colors.primary.600}" },
             active: { value: "{colors.primary.700}" },
-            muted: { value: "{colors.primary.100}" },
+            muted: { value: "{colors.primary.200}" },
           },
         },
 

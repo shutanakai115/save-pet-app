@@ -1,5 +1,6 @@
-import { Select, type SelectItem } from "./Select";
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
+
+import { Select, type SelectItem } from "./Select";
 
 const basicItems: SelectItem[] = [
   { label: "Apple", value: "apple" },
@@ -15,11 +16,11 @@ const meta = {
     docs: {
       description: {
         component: `
-ArkUIとPandaCSSで構築された多機能なセレクトコンポーネントです。
+Base UIとPandaCSSで構築されたセレクトコンポーネントです。
 基本的な選択機能、キーボードナビゲーション、アクセシビリティ機能を提供します。
 
 ## 機能
-- ArkUI: 堅牢な選択ロジックとアクセシビリティ
+- Base UI: 堅牢な選択ロジックとアクセシビリティ
 - PandaCSS: デザイントークンによる一貫したスタイリング
 - キーボードナビゲーション対応
 - シンプルなAPI設計
