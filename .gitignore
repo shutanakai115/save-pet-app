@@ -44,3 +44,7 @@ docker-compose.override.yml
 .cursor/*
 !.cursor/rules/
 !.cursor/skills/
+
+# Claude Code (APIキーを含むため除外)
+.mcp.json
+.serena/
