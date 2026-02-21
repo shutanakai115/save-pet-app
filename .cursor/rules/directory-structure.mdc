@@ -23,7 +23,7 @@ alwaysApply: false
 
 ホーム画面固有のコンポーネントを配置する。
 
-- 例: `HomeHeader`, `SavingsHero`, `SavingsEntryDrawer`, `RecentRecords`
+- 例: `HomeHeader`, `SavingsHero`, `SavingsEntryDrawer`
 
 ## (main)/page-directory
 
@@ -31,6 +31,8 @@ alwaysApply: false
 
 - 例: `goal/GoalGauge`, `goal/GoalChangeDrawer`
 
-## Future Plan
+## (main)/features
 
-ページをまたいで使う feature コンポーネントは `(main)/features/` に集約する。
+`(main)` 配下でページ横断利用される feature コンポーネントを配置する。
+
+- 例: `features/history/RecentRecords`, `features/history/RecordCard`
