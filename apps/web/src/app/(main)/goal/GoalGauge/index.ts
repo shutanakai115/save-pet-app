@@ -1,0 +1,1 @@
+export { GoalGauge } from "./GoalGauge";
