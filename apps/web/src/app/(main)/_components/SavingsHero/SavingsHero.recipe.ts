@@ -84,7 +84,6 @@ export const savingsProgressIndicatorRecipe = cva({
     borderRadius: "full",
     background: "linear-gradient(90deg, #FFC107 0%, #FFB300 100%)",
     boxShadow: "0px 1px 4px rgba(255,193,7,0.4)",
-    transition: "width 220ms ease-in-out",
   },
 });
 
@@ -112,20 +111,6 @@ export const piggyBankWrapRecipe = cva({
   },
 });
 
-export const piggyBankCircleRecipe = cva({
-  base: {
-    width: "full",
-    height: "full",
-    borderRadius: "full",
-    border: "4px solid rgba(255,255,255,0.3)",
-    background: "linear-gradient(180deg, #FFB300 0%, #FFC107 100%)",
-    boxShadow: "0px 15px 35px -5px rgba(255,193,7,0.5)",
-    color: "#4A4036",
-    display: "grid",
-    placeItems: "center",
-  },
-});
-
 export const piggyPlaceholderRecipe = cva({
   base: {
     width: "40",
@@ -141,19 +126,5 @@ export const piggyPlaceholderRecipe = cva({
     fontSize: "xs",
     fontWeight: "bold",
     lineHeight: "1.4",
-  },
-});
-
-export const piggyBankShadowRecipe = cva({
-  base: {
-    position: "absolute",
-    left: "1/2",
-    transform: "translateX(-50%)",
-    bottom: "-4",
-    width: "40",
-    height: "4",
-    borderRadius: "full",
-    backgroundColor: "rgba(0,0,0,0.05)",
-    filter: "blur(4px)",
   },
 });

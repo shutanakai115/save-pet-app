@@ -1,8 +1,10 @@
+"use client";
+
+import { motion } from "motion/react";
+
 import { SavingsEntryTrigger } from "../SavingsEntryDrawer";
 import {
-  piggyBankCircleRecipe,
   piggyPlaceholderRecipe,
-  piggyBankShadowRecipe,
   piggyBankWrapRecipe,
   savingsAmountLabelRecipe,
   savingsAmountRowRecipe,
@@ -49,7 +51,12 @@ export function SavingsHero({ totalAmount, goalAmount }: SavingsHeroProps) {
 
       <div className={savingsProgressRecipe()}>
         <div className={savingsProgressTrackRecipe()} aria-hidden="true">
-          <div className={savingsProgressIndicatorRecipe()} style={{ width: `${progress}%` }} />
+          <motion.div
+            className={savingsProgressIndicatorRecipe()}
+            initial={{ width: "0%" }}
+            animate={{ width: `${progress}%` }}
+            transition={{ duration: 1.5, delay: 0.3, ease: [0.22, 1.2, 0.36, 1] }}
+          />
         </div>
         <div className={savingsProgressMetaRecipe()}>
           <span>スタート</span>
@@ -58,14 +65,11 @@ export function SavingsHero({ totalAmount, goalAmount }: SavingsHeroProps) {
       </div>
 
       <div className={piggyBankWrapRecipe()} aria-hidden="true">
-        <div className={piggyBankCircleRecipe()}>
-          <div className={piggyPlaceholderRecipe()}>
-            キャラクター画像
-            <br />
-            プレースホルダー
-          </div>
+        <div className={piggyPlaceholderRecipe()}>
+          キャラクター画像
+          <br />
+          プレースホルダー
         </div>
-        <span className={piggyBankShadowRecipe()} />
       </div>
 
       <SavingsEntryTrigger currentTotalAmount={totalAmount} />
