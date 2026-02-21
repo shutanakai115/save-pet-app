@@ -4,7 +4,7 @@ export const subPageRootRecipe = cva({
   base: {
     position: "relative",
     marginInline: "-4",
-    minHeight: "dvh",
+    minHeight: "calc(100dvh - 6rem - env(safe-area-inset-bottom, 0px))",
     overflow: "hidden",
     background: "linear-gradient(180deg, #FFFDF5 0%, #FFE4E1 100%)",
   },
@@ -13,7 +13,7 @@ export const subPageRootRecipe = cva({
 export const subPageOverlayRecipe = cva({
   base: {
     position: "relative",
-    minHeight: "dvh",
+    minHeight: "100%",
     backgroundColor: "rgba(255,255,255,0.3)",
     backdropFilter: "blur(4px)",
     display: "grid",

@@ -5,7 +5,7 @@ export const pageContainerRecipe = cva({
     width: "full",
     marginInline: "auto",
     paddingInline: "page.x",
-    paddingBottom: "6",
+    paddingBottom: "calc(6rem + env(safe-area-inset-bottom, 0px))",
     flex: 1,
   },
 });

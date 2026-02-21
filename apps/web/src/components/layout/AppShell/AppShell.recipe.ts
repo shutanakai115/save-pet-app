@@ -14,6 +14,5 @@ export const appShellBodyRecipe = cva({
     minHeight: "dvh",
     display: "flex",
     flexDirection: "column",
-    paddingBottom: "calc(3.5rem + env(safe-area-inset-bottom, 0px))",
   },
 });
