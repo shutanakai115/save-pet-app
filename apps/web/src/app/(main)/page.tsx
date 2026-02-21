@@ -1,7 +1,7 @@
 import type { SavingsRecord } from "@/components/features/history";
+import { DecorativeBackground } from "./_layout";
 
 import {
-  DecorativeBackground,
   HomeHeader,
   RecentRecords,
   SavingsHero,
