@@ -1,0 +1,36 @@
+---
+description: (main) 配下と src/components のディレクトリ配置ポリシー
+globs: apps/web/src/app/(main)/**/*.ts, apps/web/src/app/(main)/**/*.tsx, apps/web/src/components/**/*.ts, apps/web/src/components/**/*.tsx
+alwaysApply: false
+---
+
+# Directory Structure
+
+## src/components
+
+ルートグループに依存しない汎用パーツのみ配置する。
+
+- `primitives/`: Button などの UI プリミティブ
+- `layout/`: ルート非依存で再利用するレイアウト要素
+
+## (main)/_layout
+
+`(main)` 配下で複数ページ・複数機能に跨って使うレイアウト提供コンポーネントを配置する。
+
+- 例: `SubPageLayout`, `DecorativeBackground`, `DrawerStep`
+
+## (main)/_components
+
+ホーム画面固有のコンポーネントを配置する。
+
+- 例: `HomeHeader`, `SavingsHero`, `SavingsEntryDrawer`, `RecentRecords`
+
+## (main)/page-directory
+
+そのページ専用のコンポーネントはページディレクトリ直下に配置する。
+
+- 例: `goal/GoalGauge`, `goal/GoalChangeDrawer`
+
+## Future Plan
+
+ページをまたいで使う feature コンポーネントは `(main)/features/` に集約する。
