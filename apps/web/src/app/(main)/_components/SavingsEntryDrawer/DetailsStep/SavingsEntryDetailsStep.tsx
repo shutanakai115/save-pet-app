@@ -3,9 +3,11 @@
 import { motion } from "motion/react";
 
 import { Button, Chip, Input } from "@/components/primitives";
+import { type SavingsCategory, SAVINGS_CATEGORY_OPTIONS } from "@/components/features/history";
 
 import {
   savingsEntryCategoryGridRecipe,
+  savingsEntryCategoryChipRecipe,
   savingsEntryFieldGroupRecipe,
   savingsEntryFieldLabelRecipe,
   savingsEntryStepHeaderRecipe,
@@ -16,19 +18,11 @@ import {
 
 interface SavingsEntryDetailsStepProps {
   itemName: string;
-  category: string;
+  category: SavingsCategory | "";
   onItemNameChange: (value: string) => void;
-  onCategoryChange: (value: string) => void;
+  onCategoryChange: (value: SavingsCategory) => void;
   onNext: () => void;
 }
-
-const CATEGORIES = [
-  { label: "コンビニ", value: "convenience" },
-  { label: "カフェ", value: "cafe" },
-  { label: "ネット通販", value: "online" },
-  { label: "外食", value: "dining" },
-  { label: "その他", value: "other" },
-] as const;
 
 export function SavingsEntryDetailsStep({
   itemName,
@@ -59,10 +53,14 @@ export function SavingsEntryDetailsStep({
       <div className={savingsEntryFieldGroupRecipe()}>
         <p className={savingsEntryFieldLabelRecipe()}>Category</p>
         <div className={savingsEntryCategoryGridRecipe()}>
-          {CATEGORIES.map((entry) => (
+          {SAVINGS_CATEGORY_OPTIONS.map((entry) => (
             <Chip
               key={entry.value}
               selected={category === entry.value}
+              className={savingsEntryCategoryChipRecipe({
+                category: entry.value,
+                selected: category === entry.value,
+              })}
               onClick={() => onCategoryChange(entry.value)}
             >
               {entry.label}

@@ -1,5 +1,4 @@
 import { SavingsEntryTrigger } from "../SavingsEntryDrawer";
-
 import {
   piggyBankCircleRecipe,
   piggyPlaceholderRecipe,
@@ -24,9 +23,15 @@ interface SavingsHeroProps {
 const yenFormatter = new Intl.NumberFormat("ja-JP");
 
 function clampPercentage(value: number): number {
-  if (Number.isNaN(value)) return 0;
-  if (value < 0) return 0;
-  if (value > 100) return 100;
+  if (Number.isNaN(value)) {
+    return 0;
+  }
+  if (value < 0) {
+    return 0;
+  }
+  if (value > 100) {
+    return 100;
+  }
   return value;
 }
 

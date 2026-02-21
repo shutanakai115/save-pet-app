@@ -24,8 +24,9 @@ export const savingsEntrySuccessPigWrapRecipe = cva({
 
 export const savingsEntrySuccessPigRecipe = cva({
   base: {
-    fontSize: "7xl",
-    lineHeight: "1",
+    width: "7",
+    height: "7",
+    color: "primary.500",
   },
 });
 

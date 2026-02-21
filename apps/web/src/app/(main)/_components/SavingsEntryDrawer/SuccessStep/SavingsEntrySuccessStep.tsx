@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "motion/react";
+import { PiggyBank } from "lucide-react";
 
 import { Button } from "@/components/primitives";
 
@@ -27,7 +28,7 @@ export function SavingsEntrySuccessStep({ amount, totalAmount, onClose }: Saving
     <section className={savingsEntryStepRecipe()}>
       <div className={savingsEntrySuccessPanelRecipe()}>
         <div className={savingsEntrySuccessPigWrapRecipe()} aria-hidden="true">
-          <span className={savingsEntrySuccessPigRecipe()}>🐷</span>
+          <PiggyBank className={savingsEntrySuccessPigRecipe()} aria-hidden="true" />
         </div>
 
         <p className={savingsEntrySuccessAmountRecipe()}>¥{yenFormatter.format(amount)} 貯金しました！</p>

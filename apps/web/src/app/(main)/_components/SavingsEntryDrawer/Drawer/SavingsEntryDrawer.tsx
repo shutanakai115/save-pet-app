@@ -3,6 +3,8 @@
 import { AnimatePresence, motion } from "motion/react";
 import { useRef, useState } from "react";
 
+import type { SavingsCategory } from "@/components/features/history";
+
 import { BottomSheet, Button, StepIndicator } from "@/components/primitives";
 
 import { SavingsEntryAmountStep } from "../AmountStep";
@@ -15,7 +17,7 @@ type TransitionDirection = 1 | -1;
 
 interface SavingsEntryData {
   itemName: string;
-  category: string;
+  category: SavingsCategory | "";
   amount: number | null;
 }
 
@@ -70,7 +72,11 @@ const stepMotionVariants = {
   }),
 };
 
-export function SavingsEntryDrawer({ open, onOpenChange, currentTotalAmount }: SavingsEntryDrawerProps) {
+export function SavingsEntryDrawer({
+  open,
+  onOpenChange,
+  currentTotalAmount,
+}: SavingsEntryDrawerProps) {
   const [step, setStep] = useState<SavingsEntryStep>("details");
   const [transitionDirection, setTransitionDirection] = useState<TransitionDirection>(1);
   const [frozenMinHeight, setFrozenMinHeight] = useState<number | null>(null);
@@ -96,7 +102,9 @@ export function SavingsEntryDrawer({ open, onOpenChange, currentTotalAmount }: S
   const totalAfterSave = currentTotalAmount + amount;
 
   const moveToStep = (nextStep: SavingsEntryStep) => {
-    if (nextStep === step) return;
+    if (nextStep === step) {
+      return;
+    }
 
     if (stepContentRef.current) {
       setFrozenMinHeight(stepContentRef.current.getBoundingClientRect().height);
@@ -140,8 +148,12 @@ export function SavingsEntryDrawer({ open, onOpenChange, currentTotalAmount }: S
                 <SavingsEntryDetailsStep
                   itemName={entryData.itemName}
                   category={entryData.category}
-                  onItemNameChange={(value) => setEntryData((prev) => ({ ...prev, itemName: value }))}
-                  onCategoryChange={(value) => setEntryData((prev) => ({ ...prev, category: value }))}
+                  onItemNameChange={(value) =>
+                    setEntryData((prev) => ({ ...prev, itemName: value }))
+                  }
+                  onCategoryChange={(value) =>
+                    setEntryData((prev) => ({ ...prev, category: value }))
+                  }
                   onNext={() => moveToStep("amount")}
                 />
               )}
@@ -149,14 +161,20 @@ export function SavingsEntryDrawer({ open, onOpenChange, currentTotalAmount }: S
               {step === "amount" && (
                 <SavingsEntryAmountStep
                   amount={entryData.amount}
-                  onAmountChange={(nextAmount) => setEntryData((prev) => ({ ...prev, amount: nextAmount }))}
+                  onAmountChange={(nextAmount) =>
+                    setEntryData((prev) => ({ ...prev, amount: nextAmount }))
+                  }
                   onBack={() => moveToStep("details")}
                   onNext={() => moveToStep("success")}
                 />
               )}
 
               {step === "success" && (
-                <SavingsEntrySuccessStep amount={amount} totalAmount={totalAfterSave} onClose={closeAndReset} />
+                <SavingsEntrySuccessStep
+                  amount={amount}
+                  totalAmount={totalAfterSave}
+                  onClose={closeAndReset}
+                />
               )}
             </motion.div>
           </AnimatePresence>
@@ -174,7 +192,11 @@ export function SavingsEntryTrigger({ currentTotalAmount }: { currentTotalAmount
       <Button variant="cta" size="xl" fullWidth onClick={() => setOpen(true)}>
         貯金する！
       </Button>
-      <SavingsEntryDrawer open={open} onOpenChange={setOpen} currentTotalAmount={currentTotalAmount} />
+      <SavingsEntryDrawer
+        open={open}
+        onOpenChange={setOpen}
+        currentTotalAmount={currentTotalAmount}
+      />
     </>
   );
 }
