@@ -1,1 +1,21 @@
 @layer reset, base, tokens, recipes, utilities;
+
+::view-transition-group(.shared-panel) {
+  animation-duration: 280ms;
+  animation-timing-function: ease;
+}
+
+::view-transition-group(.shared-record) {
+  animation-duration: 280ms;
+  animation-timing-function: ease;
+}
+
+::view-transition-group(root) {
+  animation-duration: 240ms;
+  animation-timing-function: ease;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 240ms;
+}

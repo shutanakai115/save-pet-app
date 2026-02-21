@@ -1,7 +1,7 @@
-import Link from "next/link";
 import type { ComponentPropsWithoutRef } from "react";
 
 import { cx } from "$styled-system/css";
+import Link from "next/link";
 
 import {
   sectionHeaderActionRecipe,
