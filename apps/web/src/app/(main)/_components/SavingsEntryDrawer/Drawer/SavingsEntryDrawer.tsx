@@ -3,9 +3,9 @@
 import { AnimatePresence, motion } from "motion/react";
 import { useRef, useState } from "react";
 
-import type { SavingsCategory } from "@/components/features/history";
-
 import { BottomSheet, Button, StepIndicator } from "@/components/primitives";
+
+import type { SavingsCategory } from "../../../_features/history";
 
 import { SavingsEntryAmountStep } from "../AmountStep";
 import { SavingsEntryDetailsStep } from "../DetailsStep";

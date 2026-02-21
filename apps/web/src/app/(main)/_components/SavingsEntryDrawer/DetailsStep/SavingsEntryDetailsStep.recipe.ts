@@ -1,5 +1,6 @@
 import { cva } from "$styled-system/css";
-import type { SavingsCategory } from "@/components/features/history";
+
+import type { SavingsCategory } from "../../../_features/history";
 
 export const savingsEntryFieldGroupRecipe = cva({
   base: {

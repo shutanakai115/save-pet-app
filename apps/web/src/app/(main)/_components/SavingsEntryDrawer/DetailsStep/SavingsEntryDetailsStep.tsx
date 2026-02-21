@@ -1,9 +1,9 @@
 "use client";
 
-import { type SavingsCategory, SAVINGS_CATEGORY_OPTIONS } from "@/components/features/history";
-import { DrawerStep } from "../../../_layout";
 import { Chip, Input } from "@/components/primitives";
 
+import { type SavingsCategory, SAVINGS_CATEGORY_OPTIONS } from "../../../_features/history";
+import { DrawerStep } from "../../../_layout";
 import {
   savingsEntryCategoryGridRecipe,
   savingsEntryCategoryChipRecipe,

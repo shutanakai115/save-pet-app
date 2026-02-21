@@ -2,13 +2,10 @@
 
 import { useState } from "react";
 
-import { DrawerStep } from "../../_layout";
-import {
-  type SavingsCategory,
-  SAVINGS_CATEGORY_OPTIONS,
-} from "@/components/features/history";
 import { BottomSheet, Chip, CurrencyInput, Input, StepIndicator } from "@/components/primitives";
 
+import { type SavingsCategory, SAVINGS_CATEGORY_OPTIONS } from "../../_features/history";
+import { DrawerStep } from "../../_layout";
 import {
   goalChangeAmountHintRecipe,
   goalChangeAmountPanelRecipe,
@@ -78,7 +75,12 @@ export function GoalChangeDrawer({
   };
 
   const handleSave = async () => {
-    if (formData.amount == null || formData.amount <= 0 || formData.goalName.trim().length === 0 || formData.category === "") {
+    if (
+      formData.amount == null ||
+      formData.amount <= 0 ||
+      formData.goalName.trim().length === 0 ||
+      formData.category === ""
+    ) {
       return;
     }
 
@@ -136,9 +138,7 @@ export function GoalChangeDrawer({
                       category: entry.value,
                       selected: formData.category === entry.value,
                     })}
-                    onClick={() =>
-                      setFormData((prev) => ({ ...prev, category: entry.value }))
-                    }
+                    onClick={() => setFormData((prev) => ({ ...prev, category: entry.value }))}
                   >
                     {entry.label}
                   </Chip>
@@ -171,7 +171,11 @@ export function GoalChangeDrawer({
               <p className={goalChangeAmountHintRecipe()}>金額を入力してください</p>
             </div>
 
-            <button type="button" className={goalChangeBackButtonRecipe()} onClick={() => setStep("details")}>
+            <button
+              type="button"
+              className={goalChangeBackButtonRecipe()}
+              onClick={() => setStep("details")}
+            >
               戻る
             </button>
             <DrawerStep.Submit

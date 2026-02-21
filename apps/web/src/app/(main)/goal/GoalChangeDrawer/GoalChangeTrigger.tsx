@@ -1,11 +1,12 @@
 "use client";
 
-import { useState } from "react";
 import { PencilLine } from "lucide-react";
-import type { SavingsCategory } from "@/components/features/history";
+import { useState } from "react";
 
-import { goalChangeTriggerButtonRecipe } from "./GoalChangeDrawer.recipe";
+import type { SavingsCategory } from "../../_features/history";
+
 import { GoalChangeDrawer } from "./GoalChangeDrawer";
+import { goalChangeTriggerButtonRecipe } from "./GoalChangeDrawer.recipe";
 
 interface GoalChangeTriggerProps {
   goalName: string;
@@ -18,7 +19,11 @@ export function GoalChangeTrigger({ goalName, category, targetAmount }: GoalChan
 
   return (
     <>
-      <button type="button" className={goalChangeTriggerButtonRecipe()} onClick={() => setOpen(true)}>
+      <button
+        type="button"
+        className={goalChangeTriggerButtonRecipe()}
+        onClick={() => setOpen(true)}
+      >
         <PencilLine size={18} />
         目標を変更
       </button>

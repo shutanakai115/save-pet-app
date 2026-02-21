@@ -1,7 +1,8 @@
-import { RecordCard, type SavingsRecord } from "@/components/features/history";
 import { SectionHeader } from "@/components/primitives";
 import * as React from "react";
 
+import { type SavingsRecord } from "../types";
+import { RecordCard } from "../RecordCard";
 import {
   recentRecordsEmptyRecipe,
   recentRecordsListRecipe,

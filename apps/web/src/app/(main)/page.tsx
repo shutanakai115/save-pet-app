@@ -1,12 +1,8 @@
-import type { SavingsRecord } from "@/components/features/history";
-import { DecorativeBackground } from "./_layout";
+import type { SavingsRecord } from "./_features/history";
 
-import {
-  HomeHeader,
-  RecentRecords,
-  SavingsHero,
-  homePageRootRecipe,
-} from "./_components";
+import { HomeHeader, SavingsHero, homePageRootRecipe } from "./_components";
+import { RecentRecords } from "./_features/history";
+import { DecorativeBackground } from "./_layout";
 
 const sampleData = {
   totalAmount: 12500,

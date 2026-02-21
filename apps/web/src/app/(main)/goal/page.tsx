@@ -1,9 +1,9 @@
-import type { SavingsCategory, SavingsRecord } from "@/components/features/history";
 import { HandCoins } from "lucide-react";
+
+import type { SavingsCategory, SavingsRecord } from "../_features/history";
+
+import { RecentRecords } from "../_features/history";
 import { SubPageLayout } from "../_layout";
-import { RecentRecords } from "../_components";
-import { GoalGauge } from "./GoalGauge";
-import { GoalChangeTrigger } from "./GoalChangeDrawer";
 import {
   goalAmountBadgeRecipe,
   goalCardRecipe,
@@ -12,6 +12,8 @@ import {
   goalProgressAmountRecipe,
   goalRemainingBadgeRecipe,
 } from "./goal.recipe";
+import { GoalChangeTrigger } from "./GoalChangeDrawer";
+import { GoalGauge } from "./GoalGauge";
 
 const sampleGoal = {
   name: "新しいヘッドフォン",
@@ -40,8 +42,8 @@ export default function GoalPage() {
           <GoalGauge value={sampleGoal.currentAmount} max={sampleGoal.targetAmount} />
 
           <p className={goalProgressAmountRecipe()}>
-            <HandCoins size={18} />
-            ¥{yenFormatter.format(sampleGoal.currentAmount)} / ¥{yenFormatter.format(sampleGoal.targetAmount)}
+            <HandCoins size={18} />¥{yenFormatter.format(sampleGoal.currentAmount)} / ¥
+            {yenFormatter.format(sampleGoal.targetAmount)}
           </p>
           <p className={goalRemainingBadgeRecipe()}>あと ¥{yenFormatter.format(remainingAmount)}</p>
 
