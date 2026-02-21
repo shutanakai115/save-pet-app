@@ -3,6 +3,7 @@
 import { motion } from "motion/react";
 import { PiggyBank } from "lucide-react";
 
+import { DrawerStep } from "../../../_layout";
 import { Button } from "@/components/primitives";
 
 import {
@@ -13,7 +14,6 @@ import {
   savingsEntrySuccessPigWrapRecipe,
   savingsEntrySuccessTotalRecipe,
 } from "./SavingsEntrySuccessStep.recipe";
-import { savingsEntryStepRecipe } from "../DetailsStep/SavingsEntryDetailsStep.recipe";
 
 interface SavingsEntrySuccessStepProps {
   amount: number;
@@ -25,7 +25,7 @@ const yenFormatter = new Intl.NumberFormat("ja-JP");
 
 export function SavingsEntrySuccessStep({ amount, totalAmount, onClose }: SavingsEntrySuccessStepProps) {
   return (
-    <section className={savingsEntryStepRecipe()}>
+    <DrawerStep.Root>
       <div className={savingsEntrySuccessPanelRecipe()}>
         <div className={savingsEntrySuccessPigWrapRecipe()} aria-hidden="true">
           <PiggyBank className={savingsEntrySuccessPigRecipe()} aria-hidden="true" />
@@ -46,6 +46,6 @@ export function SavingsEntrySuccessStep({ amount, totalAmount, onClose }: Saving
 
         <p className={savingsEntrySuccessMessageRecipe()}>素晴らしいですね！明日も無理なく続けていきましょう。</p>
       </div>
-    </section>
+    </DrawerStep.Root>
   );
 }

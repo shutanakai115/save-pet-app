@@ -1,19 +1,14 @@
 "use client";
 
-import { motion } from "motion/react";
-
-import { Button, Chip, Input } from "@/components/primitives";
 import { type SavingsCategory, SAVINGS_CATEGORY_OPTIONS } from "@/components/features/history";
+import { DrawerStep } from "../../../_layout";
+import { Chip, Input } from "@/components/primitives";
 
 import {
   savingsEntryCategoryGridRecipe,
   savingsEntryCategoryChipRecipe,
   savingsEntryFieldGroupRecipe,
   savingsEntryFieldLabelRecipe,
-  savingsEntryStepHeaderRecipe,
-  savingsEntryStepRecipe,
-  savingsEntryStepSubtitleRecipe,
-  savingsEntryStepTitleRecipe,
 } from "./SavingsEntryDetailsStep.recipe";
 
 interface SavingsEntryDetailsStepProps {
@@ -34,11 +29,11 @@ export function SavingsEntryDetailsStep({
   const canNext = itemName.trim().length > 0 && category.length > 0;
 
   return (
-    <section className={savingsEntryStepRecipe()}>
-      <header className={savingsEntryStepHeaderRecipe()}>
-        <h2 className={savingsEntryStepTitleRecipe()}>何を我慢した？</h2>
-        <p className={savingsEntryStepSubtitleRecipe()}>Step 1: 節約の記録</p>
-      </header>
+    <DrawerStep.Root>
+      <DrawerStep.Header>
+        <DrawerStep.Title>何を我慢した？</DrawerStep.Title>
+        <DrawerStep.Subtitle>Step 1: 節約の記録</DrawerStep.Subtitle>
+      </DrawerStep.Header>
 
       <div className={savingsEntryFieldGroupRecipe()}>
         <p className={savingsEntryFieldLabelRecipe()}>Item Name</p>
@@ -69,15 +64,7 @@ export function SavingsEntryDetailsStep({
         </div>
       </div>
 
-      <motion.div
-        whileTap={canNext ? { scale: 0.9, y: 4 } : undefined}
-        transition={{ type: "spring", stiffness: 300, damping: 10 }}
-        style={{ WebkitTapHighlightColor: "transparent", touchAction: "manipulation" }}
-      >
-        <Button variant="cta" size="xl" fullWidth disabled={!canNext} onClick={onNext}>
-          次へ →
-        </Button>
-      </motion.div>
-    </section>
+      <DrawerStep.Submit label="次へ →" onSubmit={onNext} canSubmit={canNext} />
+    </DrawerStep.Root>
   );
 }

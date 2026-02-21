@@ -1,19 +1,13 @@
 "use client";
 
-import { motion } from "motion/react";
-
-import { Button, CurrencyInput } from "@/components/primitives";
+import { DrawerStep } from "../../../_layout";
+import { CurrencyInput } from "@/components/primitives";
 
 import {
   savingsEntryAmountHintRecipe,
   savingsEntryAmountPanelRecipe,
   savingsEntryBackButtonRecipe,
 } from "./SavingsEntryAmountStep.recipe";
-import {
-  savingsEntryStepHeaderRecipe,
-  savingsEntryStepRecipe,
-  savingsEntryStepTitleRecipe,
-} from "../DetailsStep/SavingsEntryDetailsStep.recipe";
 
 interface SavingsEntryAmountStepProps {
   amount: number | null;
@@ -26,10 +20,10 @@ export function SavingsEntryAmountStep({ amount, onAmountChange, onBack, onNext 
   const canNext = amount != null && amount > 0;
 
   return (
-    <section className={savingsEntryStepRecipe()}>
-      <header className={savingsEntryStepHeaderRecipe()}>
-        <h2 className={savingsEntryStepTitleRecipe()}>いくら分？</h2>
-      </header>
+    <DrawerStep.Root>
+      <DrawerStep.Header>
+        <DrawerStep.Title>いくら分？</DrawerStep.Title>
+      </DrawerStep.Header>
 
       <div className={savingsEntryAmountPanelRecipe()}>
         <CurrencyInput
@@ -46,15 +40,7 @@ export function SavingsEntryAmountStep({ amount, onAmountChange, onBack, onNext 
         戻る
       </button>
 
-      <motion.div
-        whileTap={canNext ? { scale: 0.9, y: 4 } : undefined}
-        transition={{ type: "spring", stiffness: 300, damping: 10 }}
-        style={{ WebkitTapHighlightColor: "transparent", touchAction: "manipulation" }}
-      >
-        <Button variant="cta" size="xl" fullWidth disabled={!canNext} onClick={onNext}>
-          次へ →
-        </Button>
-      </motion.div>
-    </section>
+      <DrawerStep.Submit label="次へ →" onSubmit={onNext} canSubmit={canNext} />
+    </DrawerStep.Root>
   );
 }
