@@ -49,7 +49,7 @@ export function GoalGauge({ value, max }: GoalGaugeProps) {
           transform={`rotate(-90 ${CENTER} ${CENTER})`}
           initial={{ pathLength: 0 }}
           animate={{ pathLength: progress }}
-          transition={{ duration: 0.95, ease: [0.22, 1.2, 0.36, 1] }}
+          transition={{ duration: 1.5, delay: 0.3, ease: [0.22, 1.2, 0.36, 1] }}
         />
       </svg>
 
