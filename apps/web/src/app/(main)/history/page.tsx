@@ -2,18 +2,15 @@ import type { SavingsRecord } from "@/components/features/history";
 import {
   groupRecordsByMonth,
   HistoryEndMark,
-  HistoryHeader,
   MonthSection,
   MonthlySummaryCard,
 } from "@/components/features/history";
 import * as React from "react";
 
-import { DecorativeBackground } from "../_components";
+import { SubPageLayout } from "../_layout";
 import {
   historyContentRecipe,
   historyMonthSectionsRecipe,
-  historyOverlayRecipe,
-  historyPageRootRecipe,
 } from "./history.recipe";
 
 const historyRecords: SavingsRecord[] = [
@@ -46,18 +43,14 @@ export default function HistoryPage() {
   );
 
   return (
-    <div className={historyPageRootRecipe()}>
-      <DecorativeBackground />
-      <div className={historyOverlayRecipe()}>
-        <HistoryHeader />
-        {ViewTransitionComponent ? (
-          <ViewTransitionComponent name="records-panel" share="shared-panel">
-            {content}
-          </ViewTransitionComponent>
-        ) : (
-          content
-        )}
-      </div>
-    </div>
+    <SubPageLayout title="履歴">
+      {ViewTransitionComponent ? (
+        <ViewTransitionComponent name="records-panel" share="shared-panel">
+          {content}
+        </ViewTransitionComponent>
+      ) : (
+        content
+      )}
+    </SubPageLayout>
   );
 }

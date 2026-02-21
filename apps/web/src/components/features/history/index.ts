@@ -1,5 +1,4 @@
 export { RecordCard } from "./RecordCard";
-export { HistoryHeader } from "./HistoryHeader";
 export { MonthlySummaryCard } from "./MonthlySummaryCard";
 export { MonthSection } from "./MonthSection";
 export { HistoryEndMark } from "./HistoryEndMark";
