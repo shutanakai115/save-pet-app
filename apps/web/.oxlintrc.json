@@ -12,6 +12,7 @@
     "suspicious": "error"
   },
   "rules": {
+    "curly": ["error", "all"],
     "no-unused-vars": "error",
     "typescript/no-explicit-any": "error",
     "react-in-jsx-scope": "off"
