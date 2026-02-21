@@ -1,18 +1,18 @@
 import type { Metadata, Viewport } from "next";
 
-import { Inter, M_PLUS_Rounded_1c } from "next/font/google";
+import { Nunito, Zen_Kaku_Gothic_New } from "next/font/google";
 
 import "./globals.css";
 
-const mPlusRounded1c = M_PLUS_Rounded_1c({
-  variable: "--font-m-plus-rounded-1c",
+const zenKakuGothicNew = Zen_Kaku_Gothic_New({
+  variable: "--font-zen-kaku-gothic-new",
   weight: ["400", "500", "700"],
   subsets: ["latin"],
   display: "swap",
 });
 
-const inter = Inter({
-  variable: "--font-inter",
+const nunito = Nunito({
+  variable: "--font-nunito",
   subsets: ["latin"],
   display: "swap",
 });
@@ -35,7 +35,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ja" className={`${mPlusRounded1c.variable} ${inter.variable}`}>
+    <html lang="ja" className={`${zenKakuGothicNew.variable} ${nunito.variable}`}>
       <body>{children}</body>
     </html>
   );

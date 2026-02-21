@@ -127,7 +127,7 @@ export default defineConfig({
         fonts: {
           sans: {
             value:
-              "var(--font-inter), var(--font-m-plus-rounded-1c), 'M PLUS Rounded 1c', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Hiragino Kaku Gothic ProN', 'ヒラギノ角ゴ ProN W3', Meiryo, sans-serif",
+              "var(--font-nunito), var(--font-zen-kaku-gothic-new), 'Zen Kaku Gothic New', -apple-system, BlinkMacSystemFont, 'Hiragino Kaku Gothic ProN', 'ヒラギノ角ゴ ProN W3', Meiryo, sans-serif",
           },
           mono: {
             value: "'JetBrains Mono', 'SF Mono', Consolas, 'Monaco', 'Courier New', monospace",
@@ -371,7 +371,7 @@ export default defineConfig({
           },
           japanese: {
             value:
-              "var(--font-m-plus-rounded-1c), 'M PLUS Rounded 1c', 'Hiragino Kaku Gothic ProN', 'ヒラギノ角ゴ ProN W3', Meiryo, 'Yu Gothic', 'YuGothic', sans-serif",
+              "var(--font-zen-kaku-gothic-new), 'Zen Kaku Gothic New', 'Hiragino Kaku Gothic ProN', 'ヒラギノ角ゴ ProN W3', Meiryo, 'Yu Gothic', 'YuGothic', sans-serif",
           },
         },
 

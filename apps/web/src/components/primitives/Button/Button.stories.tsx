@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { Bell, Flame, Mail, Settings } from "lucide-react";
 
 import { Button } from "./Button";
 
@@ -140,18 +141,18 @@ export const WithSections: Story = {
     <div
       style={{ display: "flex", gap: "16px", flexDirection: "column", alignItems: "flex-start" }}
     >
-      <Button leftSection={<span style={{ fontSize: "14px" }}>📧</span>}>メール送信</Button>
+      <Button leftSection={<Mail size={14} />}>メール送信</Button>
       <Button rightSection={<span style={{ fontSize: "14px" }}>→</span>} variant="outline">
         次へ
       </Button>
       <Button
-        leftSection={<span style={{ fontSize: "14px" }}>⚙️</span>}
+        leftSection={<Settings size={14} />}
         rightSection={<span style={{ fontSize: "14px" }}>▼</span>}
         variant="secondary"
       >
         設定メニュー
       </Button>
-      <Button leftSection={<span style={{ fontSize: "14px" }}>🔥</span>} variant="danger" loading>
+      <Button leftSection={<Flame size={14} />} variant="danger" loading>
         アカウント削除
       </Button>
     </div>
@@ -277,7 +278,7 @@ export const AccessibilityExample: Story = {
     >
       <Button>Tabでフォーカス</Button>
       <Button disabled>フォーカス不可（無効）</Button>
-      <Button onClick={() => alert("ボタンがクリックされました！")} leftSection={<span>🔔</span>}>
+      <Button onClick={() => alert("ボタンがクリックされました！")} leftSection={<Bell size={14} />}>
         クリックでアラート
       </Button>
       <Button
