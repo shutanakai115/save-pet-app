@@ -17,8 +17,9 @@ interface GoalGaugeProps {
 }
 
 export function GoalGauge({ value, max }: GoalGaugeProps) {
-  const safeMax = Math.max(max, 1);
-  const clamped = Math.max(0, Math.min(value, safeMax));
+  const safeValue = Number(value) || 0;
+  const safeMax = Math.max(Number(max) || 0, 1);
+  const clamped = Math.max(0, Math.min(safeValue, safeMax));
   const progress = clamped / safeMax;
   const percent = Math.round(progress * 100);
 

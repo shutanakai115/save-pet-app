@@ -3,6 +3,7 @@
 import { useState } from "react";
 
 import { BottomSheet, Chip, CurrencyInput, Input, StepIndicator } from "@/components/primitives";
+import { goalCollection } from "@/lib/db";
 
 import { type SavingsCategory, SAVINGS_CATEGORY_OPTIONS } from "../../_features/history";
 import { DrawerStep } from "../../_layout";
@@ -49,18 +50,18 @@ export function GoalChangeDrawer({
 }: GoalChangeDrawerProps) {
   const [step, setStep] = useState<GoalChangeStep>("details");
   const [formData, setFormData] = useState<GoalChangeFormData>({
-    goalName: initialGoalName,
+    goalName: initialGoalName ?? "",
     category: initialCategory,
-    amount: initialTargetAmount,
+    amount: initialTargetAmount || null,
   });
   const [isSaving, setIsSaving] = useState(false);
 
   const closeAndReset = () => {
     setStep("details");
     setFormData({
-      goalName: initialGoalName,
+      goalName: initialGoalName ?? "",
       category: initialCategory,
-      amount: initialTargetAmount,
+      amount: initialTargetAmount || null,
     });
     setIsSaving(false);
     onOpenChange(false);
@@ -86,12 +87,32 @@ export function GoalChangeDrawer({
 
     setIsSaving(true);
     try {
-      await onSaved?.({
-        goalName: formData.goalName.trim(),
-        category: formData.category,
+      const payload = {
+        id: "current" as const,
+        name: formData.goalName.trim(),
+        category: formData.category as SavingsCategory,
         targetAmount: formData.amount,
+      };
+
+      const currentGoal = goalCollection.get("current");
+      if (currentGoal) {
+        goalCollection.update("current", (draft) => {
+          draft.name = payload.name;
+          draft.category = payload.category;
+          draft.targetAmount = payload.targetAmount;
+        });
+      } else {
+        goalCollection.insert(payload);
+      }
+
+      await onSaved?.({
+        goalName: payload.name,
+        category: payload.category,
+        targetAmount: payload.targetAmount,
       });
       setStep("success");
+    } catch (error) {
+      console.error("目標の保存に失敗しました", error);
     } finally {
       setIsSaving(false);
     }

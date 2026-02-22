@@ -1,11 +1,11 @@
 "use client";
 
-import { motion } from "motion/react";
 import { Target } from "lucide-react";
+import { motion } from "motion/react";
 
-import { DrawerStep } from "../../_layout";
 import { Button } from "@/components/primitives";
 
+import { DrawerStep } from "../../_layout";
 import {
   goalChangeSuccessAmountRecipe,
   goalChangeSuccessIconRecipe,
@@ -43,9 +43,7 @@ export function GoalChangeSuccessStep({ targetAmount, onClose }: GoalChangeSucce
           </Button>
         </motion.div>
 
-        <p className={goalChangeSuccessMessageRecipe()}>
-          目標に向かって一歩ずつ進めましょう。
-        </p>
+        <p className={goalChangeSuccessMessageRecipe()}>目標に向かって一歩ずつ進めましょう。</p>
       </div>
     </DrawerStep.Root>
   );

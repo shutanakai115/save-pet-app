@@ -69,4 +69,3 @@ export const goalRemainingBadgeRecipe = cva({
     fontWeight: "medium",
   },
 });
-
