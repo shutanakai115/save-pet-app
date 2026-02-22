@@ -1,0 +1,12 @@
+"use client";
+
+import { useEffect, useState } from "react";
+
+/** クライアントでマウントされたかどうかを返す。SSR 中は false。 */
+export function useMounted(): boolean {
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+  return mounted;
+}
