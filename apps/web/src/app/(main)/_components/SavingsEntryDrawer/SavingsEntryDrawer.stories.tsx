@@ -5,8 +5,14 @@ import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { css } from "$styled-system/css";
 import { useState } from "react";
 
-import { SavingsEntryAmountStep, SavingsEntryDetailsStep, SavingsEntryDrawer, SavingsEntrySuccessStep } from ".";
 import { Button } from "@/components/primitives";
+
+import {
+  SavingsEntryAmountStep,
+  SavingsEntryDetailsStep,
+  SavingsEntryDrawer,
+  SavingsEntrySuccessStep,
+} from ".";
 
 const meta = {
   title: "Features/Home/SavingsEntryDrawer",
@@ -56,7 +62,12 @@ export const DetailsStepPreview: Story = {
 export const AmountStepPreview: Story = {
   render: () => (
     <div className={css({ maxW: "md", marginX: "auto", padding: 6, backgroundColor: "white" })}>
-      <SavingsEntryAmountStep amount={500} onAmountChange={() => {}} onBack={() => {}} onNext={() => {}} />
+      <SavingsEntryAmountStep
+        amount={500}
+        onAmountChange={() => {}}
+        onBack={() => {}}
+        onNext={() => {}}
+      />
     </div>
   ),
 };

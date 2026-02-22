@@ -1,8 +1,8 @@
 "use client";
 
-import { DrawerStep } from "../../../_layout";
 import { CurrencyInput } from "@/components/primitives";
 
+import { DrawerStep } from "../../../_layout";
 import {
   savingsEntryAmountHintRecipe,
   savingsEntryAmountPanelRecipe,
@@ -16,7 +16,12 @@ interface SavingsEntryAmountStepProps {
   onNext: () => void;
 }
 
-export function SavingsEntryAmountStep({ amount, onAmountChange, onBack, onNext }: SavingsEntryAmountStepProps) {
+export function SavingsEntryAmountStep({
+  amount,
+  onAmountChange,
+  onBack,
+  onNext,
+}: SavingsEntryAmountStepProps) {
   const canNext = amount != null && amount > 0;
 
   return (

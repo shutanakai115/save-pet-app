@@ -1,11 +1,11 @@
 "use client";
 
-import { motion } from "motion/react";
 import { PiggyBank } from "lucide-react";
+import { motion } from "motion/react";
 
-import { DrawerStep } from "../../../_layout";
 import { Button } from "@/components/primitives";
 
+import { DrawerStep } from "../../../_layout";
 import {
   savingsEntrySuccessAmountRecipe,
   savingsEntrySuccessMessageRecipe,
@@ -23,7 +23,11 @@ interface SavingsEntrySuccessStepProps {
 
 const yenFormatter = new Intl.NumberFormat("ja-JP");
 
-export function SavingsEntrySuccessStep({ amount, totalAmount, onClose }: SavingsEntrySuccessStepProps) {
+export function SavingsEntrySuccessStep({
+  amount,
+  totalAmount,
+  onClose,
+}: SavingsEntrySuccessStepProps) {
   return (
     <DrawerStep.Root>
       <div className={savingsEntrySuccessPanelRecipe()}>
@@ -31,8 +35,12 @@ export function SavingsEntrySuccessStep({ amount, totalAmount, onClose }: Saving
           <PiggyBank className={savingsEntrySuccessPigRecipe()} aria-hidden="true" />
         </div>
 
-        <p className={savingsEntrySuccessAmountRecipe()}>¥{yenFormatter.format(amount)} 貯金しました！</p>
-        <p className={savingsEntrySuccessTotalRecipe()}>合計: ¥{yenFormatter.format(totalAmount)}</p>
+        <p className={savingsEntrySuccessAmountRecipe()}>
+          ¥{yenFormatter.format(amount)} 貯金しました！
+        </p>
+        <p className={savingsEntrySuccessTotalRecipe()}>
+          合計: ¥{yenFormatter.format(totalAmount)}
+        </p>
 
         <motion.div
           whileTap={{ scale: 0.9, y: 4 }}
@@ -44,7 +52,9 @@ export function SavingsEntrySuccessStep({ amount, totalAmount, onClose }: Saving
           </Button>
         </motion.div>
 
-        <p className={savingsEntrySuccessMessageRecipe()}>素晴らしいですね！明日も無理なく続けていきましょう。</p>
+        <p className={savingsEntrySuccessMessageRecipe()}>
+          素晴らしいですね！明日も無理なく続けていきましょう。
+        </p>
       </div>
     </DrawerStep.Root>
   );

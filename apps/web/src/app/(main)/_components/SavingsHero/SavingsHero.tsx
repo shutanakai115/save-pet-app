@@ -38,7 +38,10 @@ function clampPercentage(value: number): number {
 }
 
 export function SavingsHero({ totalAmount, goalAmount }: SavingsHeroProps) {
-  const progress = clampPercentage((totalAmount / goalAmount) * 100);
+  const safeTotal = Number(totalAmount) || 0;
+  const safeGoal = Number(goalAmount) || 0;
+  const progress =
+    safeGoal > 0 ? clampPercentage((safeTotal / safeGoal) * 100) : 0;
 
   return (
     <section className={savingsHeroRecipe()} aria-label="貯金概要">
@@ -46,7 +49,7 @@ export function SavingsHero({ totalAmount, goalAmount }: SavingsHeroProps) {
 
       <p className={savingsAmountRowRecipe()}>
         <span className={savingsAmountYenRecipe()}>¥</span>
-        <span className={savingsAmountValueRecipe()}>{yenFormatter.format(totalAmount)}</span>
+        <span className={savingsAmountValueRecipe()}>{yenFormatter.format(safeTotal)}</span>
       </p>
 
       <div className={savingsProgressRecipe()}>
@@ -60,7 +63,7 @@ export function SavingsHero({ totalAmount, goalAmount }: SavingsHeroProps) {
         </div>
         <div className={savingsProgressMetaRecipe()}>
           <span>スタート</span>
-          <span>ゴール (¥{yenFormatter.format(goalAmount)})</span>
+          <span>ゴール (¥{yenFormatter.format(safeGoal)})</span>
         </div>
       </div>
 
@@ -72,7 +75,7 @@ export function SavingsHero({ totalAmount, goalAmount }: SavingsHeroProps) {
         </div>
       </div>
 
-      <SavingsEntryTrigger currentTotalAmount={totalAmount} />
+      <SavingsEntryTrigger currentTotalAmount={safeTotal} />
     </section>
   );
 }

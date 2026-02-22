@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from "motion/react";
 import { useRef, useState } from "react";
 
 import { BottomSheet, Button, StepIndicator } from "@/components/primitives";
+import { savingsRecordsCollection } from "@/lib/db";
 
 import type { SavingsCategory } from "../../../_features/history";
 
@@ -165,7 +166,23 @@ export function SavingsEntryDrawer({
                     setEntryData((prev) => ({ ...prev, amount: nextAmount }))
                   }
                   onBack={() => moveToStep("details")}
-                  onNext={() => moveToStep("success")}
+                  onNext={() => {
+                    if (
+                      entryData.amount == null ||
+                      entryData.amount <= 0 ||
+                      entryData.category === ""
+                    ) {
+                      return;
+                    }
+                    savingsRecordsCollection.insert({
+                      id: crypto.randomUUID(),
+                      date: new Date().toISOString().slice(0, 10),
+                      description: entryData.itemName.trim(),
+                      amount: entryData.amount,
+                      category: entryData.category as SavingsCategory,
+                    });
+                    moveToStep("success");
+                  }}
                 />
               )}
 
