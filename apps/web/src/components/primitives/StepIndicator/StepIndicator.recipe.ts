@@ -17,7 +17,8 @@ export const stepIndicatorItemRecipe = cva({
     height: "2",
     borderRadius: "full",
     transformOrigin: "center",
-    transition: "width 220ms ease, background-color 220ms ease, transform 220ms ease, box-shadow 220ms ease",
+    transition:
+      "width 220ms ease, background-color 220ms ease, transform 220ms ease, box-shadow 220ms ease",
   },
   variants: {
     active: {

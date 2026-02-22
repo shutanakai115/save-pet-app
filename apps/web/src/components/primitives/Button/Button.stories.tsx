@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
+
 import { Bell, Flame, Mail, Settings } from "lucide-react";
 
 import { Button } from "./Button";
@@ -278,7 +279,10 @@ export const AccessibilityExample: Story = {
     >
       <Button>Tabでフォーカス</Button>
       <Button disabled>フォーカス不可（無効）</Button>
-      <Button onClick={() => alert("ボタンがクリックされました！")} leftSection={<Bell size={14} />}>
+      <Button
+        onClick={() => alert("ボタンがクリックされました！")}
+        leftSection={<Bell size={14} />}
+      >
         クリックでアラート
       </Button>
       <Button

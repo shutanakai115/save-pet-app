@@ -8,18 +8,10 @@ import { Input as BaseInput } from "@base-ui/react/input";
 
 import { currencyInputSlotRecipe } from "./CurrencyInput.recipe";
 
-export interface CurrencyInputProps
-  extends Omit<
-    ComponentProps<typeof BaseInput>,
-    | "className"
-    | "value"
-    | "onChange"
-    | "onValueChange"
-    | "type"
-    | "inputMode"
-    | "pattern"
-    | "size"
-  > {
+export interface CurrencyInputProps extends Omit<
+  ComponentProps<typeof BaseInput>,
+  "className" | "value" | "onChange" | "onValueChange" | "type" | "inputMode" | "pattern" | "size"
+> {
   value: number | null;
   onValueChange: (value: number | null) => void;
   size?: "md" | "lg";

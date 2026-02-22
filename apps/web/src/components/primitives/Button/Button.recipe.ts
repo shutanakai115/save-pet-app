@@ -109,7 +109,7 @@ export const buttonRecipe = cva({
         lineHeight: "1.4",
         whiteSpace: "nowrap",
         _before: {
-          content: "\"\"",
+          content: '""',
           position: "absolute",
           insetX: "0.5",
           top: "0.5",

@@ -1,8 +1,9 @@
-import { SectionHeader } from "@/components/primitives";
 import * as React from "react";
 
-import { type SavingsRecord } from "../types";
+import { SectionHeader } from "@/components/primitives";
+
 import { RecordCard } from "../RecordCard";
+import { type SavingsRecord } from "../types";
 import {
   recentRecordsEmptyRecipe,
   recentRecordsListRecipe,
@@ -14,10 +15,20 @@ interface RecentRecordsProps {
 }
 
 const ViewTransitionComponent =
-  (React as typeof React & { ViewTransition?: React.ComponentType<React.PropsWithChildren<{ name?: string; share?: string }>> })
-    .ViewTransition ??
-  (React as typeof React & { unstable_ViewTransition?: React.ComponentType<React.PropsWithChildren<{ name?: string; share?: string }>> })
-    .unstable_ViewTransition;
+  (
+    React as typeof React & {
+      ViewTransition?: React.ComponentType<
+        React.PropsWithChildren<{ name?: string; share?: string }>
+      >;
+    }
+  ).ViewTransition ??
+  (
+    React as typeof React & {
+      unstable_ViewTransition?: React.ComponentType<
+        React.PropsWithChildren<{ name?: string; share?: string }>
+      >;
+    }
+  ).unstable_ViewTransition;
 
 export function RecentRecords({ records }: RecentRecordsProps) {
   const hasRecords = records.length > 0;

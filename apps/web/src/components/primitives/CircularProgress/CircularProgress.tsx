@@ -26,7 +26,10 @@ export function CircularProgress({
   const progress = (clamped / max) * circumference;
 
   return (
-    <div className={circularProgressRootRecipe()} style={{ width: `${size}px`, height: `${size}px` }}>
+    <div
+      className={circularProgressRootRecipe()}
+      style={{ width: `${size}px`, height: `${size}px` }}
+    >
       <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} aria-hidden="true">
         <circle
           cx={size / 2}
@@ -53,7 +56,9 @@ export function CircularProgress({
 
       {showValue && (
         <div className={circularProgressContentRecipe()}>
-          <div className={circularProgressPercentRecipe()}>{Math.round((clamped / max) * 100)}%</div>
+          <div className={circularProgressPercentRecipe()}>
+            {Math.round((clamped / max) * 100)}%
+          </div>
           <div className={circularProgressCaptionRecipe()}>
             ¥{clamped.toLocaleString()} / ¥{max.toLocaleString()}
           </div>

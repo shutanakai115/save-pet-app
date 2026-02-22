@@ -19,7 +19,11 @@ export interface ProgressBarProps {
 export function ProgressBar({ value, max = 100, label, showValue = true }: ProgressBarProps) {
   return (
     <Progress.Root value={value} max={max} className={progressRootRecipe()}>
-      {label ? <Progress.Label className={progressLabelRecipe()}>{label}</Progress.Label> : <span />}
+      {label ? (
+        <Progress.Label className={progressLabelRecipe()}>{label}</Progress.Label>
+      ) : (
+        <span />
+      )}
       {showValue && <Progress.Value className={progressLabelRecipe()} />}
       <Progress.Track className={progressTrackRecipe()}>
         <Progress.Indicator className={progressIndicatorRecipe()} />

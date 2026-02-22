@@ -1,4 +1,5 @@
 import { cva } from "$styled-system/css";
+
 import type { SavingsCategory } from "../categories";
 
 export const recordCardRecipe = cva({

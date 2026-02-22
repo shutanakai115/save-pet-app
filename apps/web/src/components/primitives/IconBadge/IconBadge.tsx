@@ -19,7 +19,11 @@ export function IconBadge({
   ...props
 }: IconBadgeProps) {
   return (
-    <span className={cx(iconBadgeRecipe({ variant, size }), className)} aria-hidden={ariaHidden} {...props}>
+    <span
+      className={cx(iconBadgeRecipe({ variant, size }), className)}
+      aria-hidden={ariaHidden}
+      {...props}
+    >
       {children}
     </span>
   );

@@ -5,7 +5,7 @@ export const settingsContainerRecipe = cva({
     display: "grid",
     gap: "8",
     paddingX: "5",
-    paddingBottom: "8",
+    paddingBottom: "32",
   },
 });
 

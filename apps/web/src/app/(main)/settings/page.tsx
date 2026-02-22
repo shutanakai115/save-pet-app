@@ -8,7 +8,6 @@ export default function SettingsPage() {
   return (
     <SubPageLayout title="設定">
       <div className={settingsContainerRecipe()}>
-
         <section>
           <SectionHeader title="表示" />
           <div className={settingsSectionRecipe()}>
@@ -38,7 +37,6 @@ export default function SettingsPage() {
             <SettingsItem label="バージョン" description="0.1.0" />
           </div>
         </section>
-
       </div>
     </SubPageLayout>
   );

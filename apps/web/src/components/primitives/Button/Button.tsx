@@ -26,7 +26,10 @@ export interface ButtonProps extends HTMLStyledProps<"button"> {
   children?: React.ReactNode;
 }
 
-export interface LinkButtonProps extends Omit<ComponentPropsWithoutRef<typeof Link>, "className" | "children"> {
+export interface LinkButtonProps extends Omit<
+  ComponentPropsWithoutRef<typeof Link>,
+  "className" | "children"
+> {
   /** Button variant */
   variant?: "primary" | "secondary" | "outline" | "subtle" | "danger" | "cta";
   /** Button size */

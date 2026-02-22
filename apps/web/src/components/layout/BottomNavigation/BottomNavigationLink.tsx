@@ -2,8 +2,8 @@
 
 import type { ReactNode } from "react";
 
-import { usePathname } from "next/navigation";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 import {
   bottomNavigationIconWrapRecipe,
@@ -18,13 +18,22 @@ interface BottomNavigationLinkProps {
   currentPath?: string;
 }
 
-export function BottomNavigationLink({ href, icon, label, currentPath }: BottomNavigationLinkProps) {
+export function BottomNavigationLink({
+  href,
+  icon,
+  label,
+  currentPath,
+}: BottomNavigationLinkProps) {
   const pathname = usePathname();
   const activePath = currentPath ?? pathname ?? "/";
   const active = href === "/" ? activePath === "/" : activePath.startsWith(href);
 
   return (
-    <Link href={href} className={bottomNavigationLinkRecipe({ active })} aria-current={active ? "page" : undefined}>
+    <Link
+      href={href}
+      className={bottomNavigationLinkRecipe({ active })}
+      aria-current={active ? "page" : undefined}
+    >
       <span className={bottomNavigationIconWrapRecipe({ active })} aria-hidden="true">
         {icon}
       </span>

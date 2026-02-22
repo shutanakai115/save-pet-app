@@ -2,7 +2,11 @@ import { Bell, PiggyBank } from "lucide-react";
 
 import { IconBadge } from "@/components/primitives";
 
-import { homeHeaderBrandRecipe, homeHeaderRecipe, homeHeaderTitleRecipe } from "./HomeHeader.recipe";
+import {
+  homeHeaderBrandRecipe,
+  homeHeaderRecipe,
+  homeHeaderTitleRecipe,
+} from "./HomeHeader.recipe";
 
 export function HomeHeader() {
   return (
