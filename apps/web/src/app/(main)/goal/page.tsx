@@ -1,61 +1,10 @@
-import { HandCoins } from "lucide-react";
-
-import type { SavingsCategory, SavingsRecord } from "../_features/history";
-
-import { RecentRecords } from "../_features/history";
 import { SubPageLayout } from "../_layout";
-import {
-  goalAmountBadgeRecipe,
-  goalCardRecipe,
-  goalContentRecipe,
-  goalNameRecipe,
-  goalProgressAmountRecipe,
-  goalRemainingBadgeRecipe,
-} from "./goal.recipe";
-import { GoalChangeTrigger } from "./GoalChangeDrawer";
-import { GoalGauge } from "./GoalGauge";
-
-const sampleGoal = {
-  name: "新しいヘッドフォン",
-  category: "online" as SavingsCategory,
-  targetAmount: 30000,
-  currentAmount: 12500,
-};
-
-const sampleRecentRecords: SavingsRecord[] = [
-  { id: "1", date: "2026-02-24", description: "カフェで我慢", amount: 300, category: "cafe" },
-  { id: "2", date: "2026-02-22", description: "お弁当持参", amount: 500, category: "dining" },
-];
-
-const yenFormatter = new Intl.NumberFormat("ja-JP");
+import { GoalContent } from "./GoalContent";
 
 export default function GoalPage() {
-  const remainingAmount = Math.max(sampleGoal.targetAmount - sampleGoal.currentAmount, 0);
-
   return (
     <SubPageLayout title="目標">
-      <div className={goalContentRecipe()}>
-        <section className={goalCardRecipe()} aria-label="目標の進捗">
-          <h2 className={goalNameRecipe()}>{sampleGoal.name}</h2>
-          <p className={goalAmountBadgeRecipe()}>¥{yenFormatter.format(sampleGoal.targetAmount)}</p>
-
-          <GoalGauge value={sampleGoal.currentAmount} max={sampleGoal.targetAmount} />
-
-          <p className={goalProgressAmountRecipe()}>
-            <HandCoins size={18} />¥{yenFormatter.format(sampleGoal.currentAmount)} / ¥
-            {yenFormatter.format(sampleGoal.targetAmount)}
-          </p>
-          <p className={goalRemainingBadgeRecipe()}>あと ¥{yenFormatter.format(remainingAmount)}</p>
-
-          <GoalChangeTrigger
-            goalName={sampleGoal.name}
-            category={sampleGoal.category}
-            targetAmount={sampleGoal.targetAmount}
-          />
-        </section>
-      </div>
-
-      <RecentRecords records={sampleRecentRecords} />
+      <GoalContent />
     </SubPageLayout>
   );
 }

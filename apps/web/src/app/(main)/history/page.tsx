@@ -1,38 +1,8 @@
 import * as React from "react";
 
-import type { SavingsRecord } from "../_features/history";
-
-import {
-  groupRecordsByMonth,
-  HistoryEndMark,
-  MonthSection,
-  MonthlySummaryCard,
-} from "../_features/history";
 import { SubPageLayout } from "../_layout";
-import { historyContentRecipe, historyMonthSectionsRecipe } from "./history.recipe";
+import { HistoryContent } from "./HistoryContent";
 
-const historyRecords: SavingsRecord[] = [
-  { id: "1", date: "2026-02-24", description: "カフェで我慢", amount: 300, category: "cafe" },
-  { id: "2", date: "2026-02-22", description: "お弁当持参", amount: 500, category: "dining" },
-  {
-    id: "3",
-    date: "2026-02-18",
-    description: "服を買うのを我慢",
-    amount: 2500,
-    category: "online",
-  },
-  { id: "4", date: "2026-01-15", description: "一駅歩いた", amount: 250, category: "other" },
-  { id: "5", date: "2026-01-10", description: "飲み会を断った", amount: 4000, category: "dining" },
-  {
-    id: "6",
-    date: "2026-01-05",
-    description: "コンビニスイーツ我慢",
-    amount: 350,
-    category: "convenience",
-  },
-];
-
-const monthGroups = groupRecordsByMonth(historyRecords);
 const ViewTransitionComponent =
   (
     React as typeof React & {
@@ -50,17 +20,7 @@ const ViewTransitionComponent =
   ).unstable_ViewTransition;
 
 export default function HistoryPage() {
-  const content = (
-    <div className={historyContentRecipe()}>
-      <MonthlySummaryCard totalAmount={12850} />
-      <div className={historyMonthSectionsRecipe()}>
-        {monthGroups.map(([month, records]) => (
-          <MonthSection key={month} month={month} records={records} />
-        ))}
-      </div>
-      <HistoryEndMark />
-    </div>
-  );
+  const content = <HistoryContent />;
 
   return (
     <SubPageLayout title="履歴">
