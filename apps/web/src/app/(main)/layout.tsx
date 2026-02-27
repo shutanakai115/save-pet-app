@@ -2,6 +2,8 @@ import type { ReactNode } from "react";
 
 import { AppShell, BottomNavigation, PageContainer, PageTransition } from "@/components/layout";
 
+import { SavingsDataProvider } from "./_layout";
+
 interface MainLayoutProps {
   children: ReactNode;
 }
@@ -9,10 +11,12 @@ interface MainLayoutProps {
 export default function MainLayout({ children }: MainLayoutProps) {
   return (
     <AppShell>
-      <PageContainer>
-        <PageTransition>{children}</PageTransition>
-      </PageContainer>
-      <BottomNavigation />
+      <SavingsDataProvider>
+        <PageContainer>
+          <PageTransition>{children}</PageTransition>
+        </PageContainer>
+        <BottomNavigation />
+      </SavingsDataProvider>
     </AppShell>
   );
 }
