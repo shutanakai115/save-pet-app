@@ -1,11 +1,10 @@
 "use client";
 
-import { useLiveQuery } from "@tanstack/react-db";
+import { useAtomValue } from "jotai";
 import { HandCoins } from "lucide-react";
 
 import { RecentRecords } from "@/app/(main)/_features/history";
-import { goalCollection, savingsRecordsCollection } from "@/lib/db";
-import { useMounted } from "@/lib/hooks/useMounted";
+import { goalAtom, isReadyAtom, recentRecordsAtom, totalAmountAtom } from "@/app/(main)/_layout";
 
 import {
   goalAmountBadgeRecipe,
@@ -20,26 +19,13 @@ import { GoalGauge } from "./GoalGauge";
 
 const yenFormatter = new Intl.NumberFormat("ja-JP");
 
-// SSR ガード: mounted になるまで null を返す
 export function GoalContent() {
-  const mounted = useMounted();
-  if (!mounted) {return null;}
-  return <GoalContentInner />;
-}
+  const currentAmount = useAtomValue(totalAmountAtom);
+  const goal = useAtomValue(goalAtom);
+  const recentRecords = useAtomValue(recentRecordsAtom);
+  const isReady = useAtomValue(isReadyAtom);
 
-// useLiveQuery はクライアントでのみ呼ばれる
-function GoalContentInner() {
-  const { data: goals } = useLiveQuery((q) => q.from({ g: goalCollection }));
-  const { data: records } = useLiveQuery((q) => q.from({ r: savingsRecordsCollection }));
-
-  // useLiveQuery の初回 undefined（ローディング中）はレンダリングしない
-  if (goals === undefined || records === undefined) return null;
-
-  const goal = goals[0];
-  const allRecords = records ?? [];
-  const currentAmount = allRecords.reduce((sum, r) => sum + (Number(r.amount) || 0), 0);
-
-  const recentRecords = [...allRecords].toSorted((a, b) => b.date.localeCompare(a.date)).slice(0, 3);
+  if (!isReady) return null;
 
   const targetAmount = Number(goal?.targetAmount) || 0;
   const remainingAmount = Math.max(targetAmount - currentAmount, 0);
