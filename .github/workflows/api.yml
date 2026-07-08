@@ -1,7 +1,7 @@
 name: API CI
 
-# PR とマージ時に API の lint / build を検証する（デプロイはしない）。
-# デプロイは deploy-api.yml が main への push で担当する。
+# PR と main push 時に API の lint / typecheck / format / build / test を検証する。
+# デプロイは deploy-api.yml が API CI 成功後（main push 時）に担当する。
 on:
   push:
     branches: [main]

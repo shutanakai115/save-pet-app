@@ -1,19 +1,16 @@
 name: Deploy API
 
-# main への push で、API のビルド → Artifact Registry へ push → Cloud Run へデプロイを自動実行する。
+# API CI 成功後に、ビルド → Artifact Registry へ push → Cloud Run へデプロイを自動実行する。
 # 認証は Workload Identity Federation (WIF) を使い、キー(JSON)は保持しない。
 on:
-  push:
-    branches: [main]
-    paths:
-      - "apps/api/**"
-      - "packages/**"
-      - ".github/workflows/deploy-api.yml"
+  workflow_run:
+    workflows: ["API CI"]
+    types: [completed]
   workflow_dispatch: # 手動実行も可能にしておく
 
 # 同一ブランチのデプロイが重ならないようにする（後発を優先し、先発はキャンセル）
 concurrency:
-  group: deploy-api-${{ github.ref }}
+  group: deploy-api-${{ github.event.workflow_run.head_branch || github.ref }}
   cancel-in-progress: false
 
 env:
@@ -27,11 +24,20 @@ jobs:
   deploy:
     name: Build & Deploy to Cloud Run
     runs-on: ubuntu-latest
+    # workflow_run: main への push で API CI が成功したときのみ。workflow_dispatch は常に実行可。
+    if: >
+      github.event_name == 'workflow_dispatch' ||
+      (github.event.workflow_run.conclusion == 'success' &&
+       github.event.workflow_run.event == 'push' &&
+       github.event.workflow_run.head_branch == 'main')
     permissions:
       contents: read
       id-token: write # WIF に必須（OIDC トークンの発行）
     steps:
       - uses: actions/checkout@v4
+        with:
+          # CI で検証済みのコミットをデプロイする（手動実行時はデフォルト ref）
+          ref: ${{ github.event.workflow_run.head_sha || github.sha }}
 
       - name: Authenticate to Google Cloud (WIF)
         uses: google-github-actions/auth@v2
@@ -45,16 +51,20 @@ jobs:
         run: gcloud auth configure-docker ${{ env.REGION }}-docker.pkg.dev --quiet
 
       - name: Build & Push
+        env:
+          DEPLOY_SHA: ${{ github.event.workflow_run.head_sha || github.sha }}
         # ランナーは amd64 なので --platform 指定は不要。
         # タグはコミットハッシュ。「本番で動いているコード = このコミット」を常に特定できる。
         run: |
-          docker build -t "${IMAGE}:${{ github.sha }}" apps/api
-          docker push "${IMAGE}:${{ github.sha }}"
+          docker build -t "${IMAGE}:${DEPLOY_SHA}" apps/api
+          docker push "${IMAGE}:${DEPLOY_SHA}"
 
       - name: Deploy to Cloud Run
+        env:
+          DEPLOY_SHA: ${{ github.event.workflow_run.head_sha || github.sha }}
         run: |
           gcloud run deploy "${SERVICE}" \
-            --image="${IMAGE}:${{ github.sha }}" \
+            --image="${IMAGE}:${DEPLOY_SHA}" \
             --region="${REGION}" \
             --allow-unauthenticated \
             --min-instances=0 --max-instances=2 \
