@@ -4,7 +4,7 @@ Go + Next.jsのモノレポ構成アプリケーション
 
 ## 構成
 
-- **apps/web** - Next.js 15 + Panda CSS + Ark UI
+- **apps/web** - Next.js 15 + Panda CSS + Base UI
 - **apps/api** - Go REST APIサーバー
 - **packages/** - 共有パッケージ（将来用）
 

@@ -1,27 +1,27 @@
-# Next.js + ArkUI + PandaCSS Template
+# Next.js + Base UI + PandaCSS Template
 
-A modern React template with Next.js, ArkUI, and PandaCSS for building design systems and applications.
+A modern React template with Next.js, Base UI, and PandaCSS for building design systems and applications.
 
 ## Tech Stack
 
 - **Next.js 15** - React framework with App Router
-- **ArkUI** - Headless UI components
+- **Base UI** - Headless UI components
 - **PandaCSS** - Build-time CSS-in-JS with design tokens
 - **TypeScript** - Type safety
 - **Storybook** - Component development
-- **Biome** - Fast linting and formatting
+- **oxlint / oxfmt** - Fast linting and formatting
 
 ## Quick Start
 
 ```bash
-# Install dependencies
-npm install
+# Install dependencies (from repository root)
+pnpm install
 
 # Generate PandaCSS styles
-npm run prepare
+pnpm --filter @saving-pet/web prepare
 
 # Start development server
-npm run dev
+pnpm dev:web
 ```
 
 Open [http://localhost:3000](http://localhost:3000) to view the app.
@@ -29,14 +29,14 @@ Open [http://localhost:3000](http://localhost:3000) to view the app.
 ## Available Scripts
 
 ```bash
-npm run dev          # Start development server
-npm run build        # Build for production
-npm run start        # Start production server
-npm run prepare      # Generate PandaCSS styles
-npm run lint         # Run Biome linter
-npm run format       # Format code with Biome
-npm run storybook    # Start Storybook
-npm run studio       # Launch Panda Studio (design tokens editor)
+pnpm dev          # Start development server
+pnpm build        # Build for production
+pnpm start        # Start production server
+pnpm prepare      # Generate PandaCSS styles
+pnpm lint         # Run oxlint
+pnpm format       # Format code with oxfmt
+pnpm storybook    # Start Storybook
+pnpm studio       # Launch Panda Studio (design tokens editor)
 ```
 
 ## Project Structure
@@ -56,7 +56,7 @@ panda.config.ts        # PandaCSS configuration
 - 🎨 **Design System Ready** - Built-in design tokens and theming
 - 🧩 **Primitive Components** - Button, Select with shorthand props support
 - 📱 **Responsive** - 8px grid system with responsive utilities
-- ♿ **Accessible** - ArkUI components with built-in accessibility
+- ♿ **Accessible** - Base UI components with built-in accessibility
 - 🔧 **Developer Experience** - TypeScript, Storybook, hot reload
 
 ## Usage Example
