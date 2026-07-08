@@ -9,6 +9,8 @@ import { Pool } from "pg";
 import { afterAll, beforeAll, describe, expect, it } from "vitest";
 
 const DATABASE_URL = process.env.DATABASE_URL;
+const hasDatabaseUrl = Boolean(DATABASE_URL);
+const describeIfDatabase = hasDatabaseUrl ? describe : describe.skip;
 
 interface ColumnRow {
   column_name: string;
@@ -25,13 +27,6 @@ interface ConstraintRow {
 }
 
 let pool: Pool;
-
-function requireDatabaseUrl(): string {
-  if (!DATABASE_URL) {
-    throw new Error("DATABASE_URL is required. Run migrations before tests.");
-  }
-  return DATABASE_URL;
-}
 
 async function getColumns(tableName: string): Promise<ColumnRow[]> {
   const result = await pool.query<ColumnRow>(
@@ -69,14 +64,22 @@ function findColumn(columns: ColumnRow[], name: string): ColumnRow {
 }
 
 beforeAll(() => {
-  pool = new Pool({ connectionString: requireDatabaseUrl() });
+  if (!DATABASE_URL) {
+    return;
+  }
+
+  pool = new Pool({ connectionString: DATABASE_URL });
 });
 
 afterAll(async () => {
+  if (!pool) {
+    return;
+  }
+
   await pool.end();
 });
 
-describe("マイグレーション後のスキーマ", () => {
+describeIfDatabase("マイグレーション後のスキーマ", () => {
   it("goals と records テーブルが存在する", async () => {
     const result = await pool.query<{ table_name: string }>(
       `
@@ -92,7 +95,7 @@ describe("マイグレーション後のスキーマ", () => {
   });
 });
 
-describe("goals テーブル", () => {
+describeIfDatabase("goals テーブル", () => {
   it("必須カラムと型が定義どおりである", async () => {
     const columns = await getColumns("goals");
 
@@ -194,7 +197,7 @@ describe("goals テーブル", () => {
   });
 });
 
-describe("records テーブル", () => {
+describeIfDatabase("records テーブル", () => {
   it("必須カラムと型が定義どおりである", async () => {
     const columns = await getColumns("records");
 
