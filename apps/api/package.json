@@ -7,18 +7,27 @@
     "dev": "tsx watch src/index.ts",
     "build": "tsc",
     "start": "node dist/index.js",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit migrate",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "lint": "oxlint .",
     "format": "oxfmt --write ."
   },
   "dependencies": {
     "@hono/node-server": "^1.14.4",
-    "hono": "^4.8.5"
+    "drizzle-orm": "^0.44.7",
+    "hono": "^4.8.5",
+    "pg": "^8.22.0"
   },
   "devDependencies": {
     "@types/node": "^24",
+    "@types/pg": "^8.20.0",
+    "drizzle-kit": "^0.31.10",
     "oxfmt": "^0.34.0",
     "oxlint": "^1.49.0",
     "tsx": "^4.20.3",
-    "typescript": "^5"
+    "typescript": "^5",
+    "vitest": "^3.2.4"
   }
 }
