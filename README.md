@@ -68,13 +68,26 @@ docker build -t saving-pet-api ./apps/api
 cd apps/web && vercel
 ```
 
-### バックエンド（Cloud Run）
+### バックエンド（Cloud Run / GitHub Actions で自動デプロイ）
 
-1. Google Cloud プロジェクトを作成
-2. Artifact Registry に Docker イメージをプッシュ
-3. Cloud Run（asia-northeast1 / 東京）にデプロイ
-4. 環境変数 `PORT` は Cloud Run が自動設定
-5. 本番 DB は Supabase（東京リージョン）の `DATABASE_URL` を設定
+`main` への push で `.github/workflows/deploy-api.yml` が発火し、build → Artifact Registry へ push → Cloud Run へデプロイまで自動実行される（`apps/api/**` または `packages/**` の変更時のみ）。イメージタグはコミットハッシュ（`github.sha`）で、「本番で動いているコード = このコミット」を常に特定できる。
+
+認証は Workload Identity Federation（WIF）を使用し、サービスアカウントのキー（JSON）は GitHub に保持しない。
+
+#### 初回のみ: GCP 側の信頼設定
+
+```bash
+# WIF プール / OIDC プロバイダ / デプロイ用 SA を作成（冪等・再実行可）
+./scripts/setup-gcp-wif.sh
+```
+
+- 環境変数 `PORT` は Cloud Run が自動設定
+- 本番 DB は Supabase（東京リージョン）の `DATABASE_URL` を設定（将来フェーズ）
+
+#### CI（PR 時）
+
+- `apps/api/**` の PR で `.github/workflows/api.yml` が lint / build を実行（デプロイはしない）
+- `apps/web/**` の PR は `.github/workflows/web.yml` が lint / unit / minimal e2e を実行
 
 ## その他
 

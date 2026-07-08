@@ -1,0 +1,61 @@
+name: Deploy API
+
+# main への push で、API のビルド → Artifact Registry へ push → Cloud Run へデプロイを自動実行する。
+# 認証は Workload Identity Federation (WIF) を使い、キー(JSON)は保持しない。
+on:
+  push:
+    branches: [main]
+    paths:
+      - "apps/api/**"
+      - "packages/**"
+      - ".github/workflows/deploy-api.yml"
+  workflow_dispatch: # 手動実行も可能にしておく
+
+# 同一ブランチのデプロイが重ならないようにする（後発を優先し、先発はキャンセル）
+concurrency:
+  group: deploy-api-${{ github.ref }}
+  cancel-in-progress: false
+
+env:
+  PROJECT_ID: save-pet-app-api-1105
+  REGION: asia-northeast1
+  SERVICE: save-pet-api
+  # asia-northeast1-docker.pkg.dev/<project>/<repo>/<image>
+  IMAGE: asia-northeast1-docker.pkg.dev/save-pet-app-api-1105/save-pet/api
+
+jobs:
+  deploy:
+    name: Build & Deploy to Cloud Run
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write # WIF に必須（OIDC トークンの発行）
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Authenticate to Google Cloud (WIF)
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: projects/529579362931/locations/global/workloadIdentityPools/github/providers/github-provider
+          service_account: github-deployer@save-pet-app-api-1105.iam.gserviceaccount.com
+
+      - uses: google-github-actions/setup-gcloud@v2
+
+      - name: Configure Docker for Artifact Registry
+        run: gcloud auth configure-docker ${{ env.REGION }}-docker.pkg.dev --quiet
+
+      - name: Build & Push
+        # ランナーは amd64 なので --platform 指定は不要。
+        # タグはコミットハッシュ。「本番で動いているコード = このコミット」を常に特定できる。
+        run: |
+          docker build -t "${IMAGE}:${{ github.sha }}" apps/api
+          docker push "${IMAGE}:${{ github.sha }}"
+
+      - name: Deploy to Cloud Run
+        run: |
+          gcloud run deploy "${SERVICE}" \
+            --image="${IMAGE}:${{ github.sha }}" \
+            --region="${REGION}" \
+            --allow-unauthenticated \
+            --min-instances=0 --max-instances=2 \
+            --memory=512Mi --cpu=1

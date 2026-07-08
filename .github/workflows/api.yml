@@ -1,0 +1,44 @@
+name: API CI
+
+# PR とマージ時に API の lint / build を検証する（デプロイはしない）。
+# デプロイは deploy-api.yml が main への push で担当する。
+on:
+  push:
+    branches: [main]
+    paths:
+      - "apps/api/**"
+      - "packages/**"
+      - "package.json"
+      - "pnpm-lock.yaml"
+      - ".github/workflows/api.yml"
+  pull_request:
+    paths:
+      - "apps/api/**"
+      - "packages/**"
+      - "package.json"
+      - "pnpm-lock.yaml"
+      - ".github/workflows/api.yml"
+
+concurrency:
+  group: api-ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    name: Lint & Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10.15.0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .node-version
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm --filter @saving-pet/api lint
+      - run: pnpm --filter @saving-pet/api build
