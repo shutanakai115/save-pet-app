@@ -45,8 +45,7 @@ export function SavingsHero({ totalAmount, goalAmount }: SavingsHeroProps) {
 
   const safeTotal = Number(totalAmount) || 0;
   const safeGoal = Number(goalAmount) || 0;
-  const progress =
-    safeGoal > 0 ? clampPercentage((safeTotal / safeGoal) * 100) : 0;
+  const progress = safeGoal > 0 ? clampPercentage((safeTotal / safeGoal) * 100) : 0;
 
   const handleSaveComplete = () => {
     setCelebrating(true);
@@ -81,10 +80,7 @@ export function SavingsHero({ totalAmount, goalAmount }: SavingsHeroProps) {
       </div>
 
       <div className={piggyBankWrapRecipe()}>
-        <PiggyMascot
-          celebrating={celebrating}
-          onClick={() => setDrawerOpen(true)}
-        />
+        <PiggyMascot celebrating={celebrating} onClick={() => setDrawerOpen(true)} />
       </div>
 
       <SavingsEntryTrigger
