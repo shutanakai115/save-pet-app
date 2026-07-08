@@ -5,6 +5,8 @@ import { useRef, useState } from "react";
 
 import { PiggyMascot } from "../PiggyMascot";
 import { SavingsEntryTrigger } from "../SavingsEntryDrawer";
+import { calculateSavingsProgress } from "@/lib/savings";
+
 import {
   piggyBankWrapRecipe,
   savingsAmountLabelRecipe,
@@ -25,19 +27,6 @@ interface SavingsHeroProps {
 
 const yenFormatter = new Intl.NumberFormat("ja-JP");
 
-function clampPercentage(value: number): number {
-  if (Number.isNaN(value)) {
-    return 0;
-  }
-  if (value < 0) {
-    return 0;
-  }
-  if (value > 100) {
-    return 100;
-  }
-  return value;
-}
-
 export function SavingsHero({ totalAmount, goalAmount }: SavingsHeroProps) {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [celebrating, setCelebrating] = useState(false);
@@ -45,7 +34,7 @@ export function SavingsHero({ totalAmount, goalAmount }: SavingsHeroProps) {
 
   const safeTotal = Number(totalAmount) || 0;
   const safeGoal = Number(goalAmount) || 0;
-  const progress = safeGoal > 0 ? clampPercentage((safeTotal / safeGoal) * 100) : 0;
+  const progress = calculateSavingsProgress(safeTotal, safeGoal);
 
   const handleSaveComplete = () => {
     setCelebrating(true);

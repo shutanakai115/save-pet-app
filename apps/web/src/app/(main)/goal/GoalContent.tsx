@@ -25,7 +25,7 @@ export function GoalContent() {
   const recentRecords = useAtomValue(recentRecordsAtom);
   const isReady = useAtomValue(isReadyAtom);
 
-  if (!isReady) return null;
+  if (!isReady) { return null; }
 
   const targetAmount = Number(goal?.targetAmount) || 0;
   const remainingAmount = Math.max(targetAmount - currentAmount, 0);

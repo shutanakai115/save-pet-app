@@ -18,7 +18,7 @@ export function SavingsDataProvider({ children }: { children: ReactNode }) {
   const mounted = useMounted();
 
   // SSR ではデータ同期をスキップしてそのまま children をレンダリング
-  if (!mounted) return <>{children}</>;
+  if (!mounted) { return <>{children}</>; }
 
   return <SavingsDataSyncer>{children}</SavingsDataSyncer>;
 }
@@ -34,10 +34,10 @@ function SavingsDataSyncer({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     // rawRecords / goals どちらかがまだ未解決なら isReady を立てない
-    if (rawRecords === undefined || goals === undefined) return;
+    if (rawRecords === undefined || goals === undefined) { return; }
 
     const sorted = [...rawRecords]
-      .sort((a, b) => b.date.localeCompare(a.date))
+      .toSorted((a, b) => b.date.localeCompare(a.date))
       .slice(0, MAX_RECORDS);
 
     setRecords(sorted);

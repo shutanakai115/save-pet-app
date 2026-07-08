@@ -1,9 +1,14 @@
 ---
 name: audit-rsc-boundary
-description: Next.js の Server/Client Component 境界を監査し、不要な "use client" の除去や分割候補を特定する。コンポーネント実装の最後や PR 前のレビュー時に使用。
+description: Next.js の Server/Client Component 境界を監査し、不要な "use client" を除去する。加えて分割候補をトレードオフ付きで提示する（自動分割はしない）。コンポーネント実装の最後や PR 前のレビュー時に使用。
 ---
 
 # RSC 境界監査
+
+監査は2つの性質に分かれる。混同しない。
+
+- **除去（機械的・副作用なし）**: 不要な "use client" を消す。自動で実施してよい。
+- **分割（トレードオフあり）**: 境界をリーフに下げる分割。自動実施せず、候補として提示する。
 
 ## ワークフロー
 
@@ -11,7 +16,7 @@ description: Next.js の Server/Client Component 境界を監査し、不要な 
 
 `apps/web/src/components/` 配下で `"use client"` を持つ全ファイルを検索する。
 
-### Step 2: 各ファイルの必要性を判定
+### Step 2: 必要性を判定（機械的）
 
 各ファイルについて以下を確認し、いずれにも該当しなければ "use client" は不要:
 
@@ -20,27 +25,35 @@ description: Next.js の Server/Client Component 境界を監査し、不要な 
 - クライアント専用ライブラリをインポートしているか
 - イベントハンドラを受け取る前提のインタラクティブ要素か
 
-### Step 3: 分割候補を特定
+### Step 3: 不要な "use client" を除去
 
-"use client" が必要なファイルについて、静的構造と Client ロジックが分離可能か確認する。分離可能なら co-located パターンで分割し境界をリーフに下げる。
+Step 2 でいずれにも該当しなかったファイルから "use client" を除去する。
+recipe ファイルに "use client" が混入していれば同様に除去する。
+（ここまでは判断の余地がないため実施する）
 
-### Step 4: 修正を実施
+### Step 4: 分割候補を提示（実施しない）
 
-- 不要な "use client" を除去
-- 分割候補を co-located で実装
-- recipe ファイルに "use client" が混入していないことを確認
+"use client" が必要なファイルのうち、静的構造と Client ロジックが分離可能なものを
+**候補として洗い出す**。各候補に次を添える。
+
+- 削減が見込める client JS の規模（大/中/小）
+- 分割によるコスト（増えるファイル数・間接化の程度）
+- 推奨（分割する / 見送る / 判断を委ねる）
+
+削減が小さい・可読性が落ちる場合は「見送り」を推奨する。**この Step では自動でファイルを分割しない。**
+分割するかは人の判断に委ね、承認された候補のみ実施する。
 
 ### Step 5: 検証
 
-`pnpm --filter @saving-pet/web build` でビルド通過を確認する。
+除去や（承認された）分割を行った場合、`pnpm --filter @saving-pet/web build` でビルド通過を確認する。
 
 ## 判定早見表
 
-| パターン | "use client" | 例 |
+| パターン | "use client" | 対応 |
 |---|---|---|
-| hooks 使用 | 必要 | usePathname, useState |
-| Base UI 使用 | 必要 | Dialog, Select, Input |
-| インタラクティブ要素 | 必要 | Button, Chip |
-| 純粋な表示 | 不要 | Card, CircularProgress |
-| recipe ファイル | 絶対不要 | *.recipe.ts |
-| 混在 | 分割検討 | BottomNav → BottomNav + BottomNavLink |
+| hooks 使用 | 必要 | 維持 |
+| Base UI / motion 使用 | 必要 | 維持 |
+| インタラクティブ要素 | 必要 | 維持 |
+| 純粋な表示なのに付いている | 不要 | **除去（機械的）** |
+| recipe ファイル | 絶対不要 | **除去（機械的）** |
+| 静的＋Client 混在で肥大 | 必要 | **分割候補として提示（トレードオフ判断）** |

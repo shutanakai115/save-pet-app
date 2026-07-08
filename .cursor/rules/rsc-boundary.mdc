@@ -6,19 +6,29 @@ alwaysApply: false
 
 # Server/Client Component 境界
 
-## 原則
+## 制約（決定論的・必ず守る）
+
+技術的に一意に決まるため、判断の余地はない。
 
 - コンポーネントはデフォルトで Server Component として作成する
-- "use client" は以下のケースにのみ付与する:
+- 次のいずれかに該当する場合のみ "use client" を付与する:
   - React hooks (useState, useEffect, usePathname 等) を使用
   - ブラウザ API を使用
-  - クライアント専用ライブラリ (Base UI 等) をインポート
+  - クライアント専用ライブラリ (Base UI, motion 等) をインポート
   - onClick 等のイベントハンドラを受け取る前提のインタラクティブ要素
+- 上記いずれにも該当しないのに付いている "use client" は**不要なので除去する**
 - recipe ファイル (*.recipe.ts) には絶対に "use client" を付けない
 
-## 階層化による最小化
+## 最適化（トレードオフあり・判断が必要）
 
-静的な構造部分と Client ロジックが混在する場合、co-located で分割し "use client" 境界をリーフに押し下げる。
+静的構造と Client ロジックが混在するコンポーネントを分割し、"use client" 境界を
+リーフに押し下げる手法。**常に行うべきものではない。**
+
+これは「client JS の削減（パフォーマンス）」と「ファイル数・間接化の増加（可読性・保守性）」の
+トレードオフである。次を目安に判断する。
+
+- **分割を検討する**: 静的部分が大きい / ホットパスや大きなツリー / 削減できる client JS が実質的
+- **分割しない**: 削減できる JS がごくわずか / 分割で可読性がむしろ落ちる / 静的部分がごく小さい
 
 ```
 BottomNav/
@@ -26,9 +36,10 @@ BottomNav/
   BottomNavLink.tsx  ← Client (usePathname で active 判定)
 ```
 
+判断に迷う場合は分割を強制せず、トレードオフを添えて候補として提示する。
+
 ## 判断フロー
 
-1. hooks / browser API / client lib を使うか → "use client"
-2. イベントハンドラを受け取る前提か → "use client"
-3. どちらにも該当しない → Server Component
-4. 一部だけ該当する → co-located 分割を検討
+1. hooks / browser API / client lib / イベントハンドラを使うか → "use client"（制約）
+2. どれにも該当しないのに "use client" が付いているか → 除去する（制約）
+3. 一部だけ Client でファイルが大きいか → 分割の価値をトレードオフで評価（最適化）

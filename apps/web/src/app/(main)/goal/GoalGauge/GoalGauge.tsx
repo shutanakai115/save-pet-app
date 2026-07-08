@@ -2,6 +2,8 @@
 
 import { motion } from "motion/react";
 
+import { calculateGoalGaugePercent } from "@/lib/savings";
+
 import {
   goalGaugeCaptionRecipe,
   goalGaugeCenterRecipe,
@@ -21,7 +23,7 @@ export function GoalGauge({ value, max }: GoalGaugeProps) {
   const safeMax = Math.max(Number(max) || 0, 1);
   const clamped = Math.max(0, Math.min(safeValue, safeMax));
   const progress = clamped / safeMax;
-  const percent = Math.round(progress * 100);
+  const percent = calculateGoalGaugePercent(safeValue, safeMax);
 
   const SIZE = 256;
   const STROKE_WIDTH = 24;

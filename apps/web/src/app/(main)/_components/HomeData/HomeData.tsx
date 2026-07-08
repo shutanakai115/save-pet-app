@@ -13,7 +13,7 @@ export function HomeData() {
   const recentRecords = useAtomValue(recentRecordsAtom);
   const isReady = useAtomValue(isReadyAtom);
 
-  if (!isReady) return null;
+  if (!isReady) { return null; }
 
   return (
     <>
