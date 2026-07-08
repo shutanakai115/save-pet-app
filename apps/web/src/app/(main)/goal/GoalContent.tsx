@@ -25,7 +25,9 @@ export function GoalContent() {
   const recentRecords = useAtomValue(recentRecordsAtom);
   const isReady = useAtomValue(isReadyAtom);
 
-  if (!isReady) { return null; }
+  if (!isReady) {
+    return null;
+  }
 
   const targetAmount = Number(goal?.targetAmount) || 0;
   const remainingAmount = Math.max(targetAmount - currentAmount, 0);
@@ -44,7 +46,9 @@ export function GoalContent() {
               <HandCoins size={18} />¥{yenFormatter.format(currentAmount)} / ¥
               {yenFormatter.format(targetAmount)}
             </p>
-            <p className={goalRemainingBadgeRecipe()}>あと ¥{yenFormatter.format(remainingAmount)}</p>
+            <p className={goalRemainingBadgeRecipe()}>
+              あと ¥{yenFormatter.format(remainingAmount)}
+            </p>
           </>
         ) : (
           <h2 className={goalNameRecipe()}>目標を設定してください</h2>

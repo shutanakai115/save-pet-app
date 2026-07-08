@@ -20,12 +20,7 @@ export default defineConfig({
     coverage: {
       provider: "v8",
       include: ["src/**/*.{ts,tsx}"],
-      exclude: [
-        "**/*.stories.tsx",
-        "**/*.{test,spec}.{ts,tsx}",
-        "**/*.recipe.ts",
-        "**/index.ts",
-      ],
+      exclude: ["**/*.stories.tsx", "**/*.{test,spec}.{ts,tsx}", "**/*.recipe.ts", "**/index.ts"],
     },
   },
 });

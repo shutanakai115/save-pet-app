@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 
 import type { SavingsRecord } from "./types";
+
 import { formatMonthHeading, formatRecordDate, groupRecordsByMonth } from "./date";
 
 describe("formatRecordDate", () => {

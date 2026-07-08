@@ -115,9 +115,17 @@ export function PiggyMascot({ celebrating, onClick }: PiggyMascotProps) {
 
             {/* 耳 */}
             <path className="piggy-ear-l" d="M70 88 Q62 58 86 62 Q94 74 88 86 Z" fill="#F09CB4" />
-            <path className="piggy-ear-r" d="M170 88 Q178 58 154 62 Q146 74 152 86 Z" fill="#F09CB4" />
+            <path
+              className="piggy-ear-r"
+              d="M170 88 Q178 58 154 62 Q146 74 152 86 Z"
+              fill="#F09CB4"
+            />
             <path className="piggy-ear-l" d="M74 84 Q70 66 84 68 Q89 76 85 83 Z" fill="#FBC5D2" />
-            <path className="piggy-ear-r" d="M166 84 Q170 66 156 68 Q151 76 155 83 Z" fill="#FBC5D2" />
+            <path
+              className="piggy-ear-r"
+              d="M166 84 Q170 66 156 68 Q151 76 155 83 Z"
+              fill="#FBC5D2"
+            />
 
             {/* からだ（貯金箱） */}
             <ellipse cx="120" cy="132" rx="78" ry="62" fill="#F8B4C6" />
@@ -163,7 +171,15 @@ export function PiggyMascot({ celebrating, onClick }: PiggyMascotProps) {
 
             {/* 鼻 */}
             <ellipse cx="120" cy="134" rx="20" ry="14" fill="#F48FB1" />
-            <ellipse cx="120" cy="134" rx="20" ry="14" fill="none" stroke="#E27A9E" strokeWidth="2" />
+            <ellipse
+              cx="120"
+              cy="134"
+              rx="20"
+              ry="14"
+              fill="none"
+              stroke="#E27A9E"
+              strokeWidth="2"
+            />
             <ellipse cx="113" cy="134" rx="3.2" ry="4.5" fill="#C95F82" />
             <ellipse cx="127" cy="134" rx="3.2" ry="4.5" fill="#C95F82" />
           </g>

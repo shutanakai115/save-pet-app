@@ -1,10 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import {
-  calculateGoalGaugePercent,
-  calculateSavingsProgress,
-  clampPercentage,
-} from "./progress";
+import { calculateGoalGaugePercent, calculateSavingsProgress, clampPercentage } from "./progress";
 
 describe("clampPercentage", () => {
   it("NaN の場合は 0 を返す", () => {

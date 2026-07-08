@@ -1,8 +1,7 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-
 import { useAtomValue } from "jotai";
+import { useEffect, useRef, useState } from "react";
 
 import {
   groupRecordsByMonth,
@@ -26,7 +25,9 @@ export function HistoryContent() {
 
   useEffect(() => {
     const sentinel = sentinelRef.current;
-    if (!sentinel) { return; }
+    if (!sentinel) {
+      return;
+    }
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -41,7 +42,9 @@ export function HistoryContent() {
     return () => observer.disconnect();
   }, [records.length]);
 
-  if (!isReady) { return null; }
+  if (!isReady) {
+    return null;
+  }
 
   const displayedRecords = records.slice(0, displayCount);
   const monthGroups = groupRecordsByMonth(displayedRecords);
@@ -57,11 +60,7 @@ export function HistoryContent() {
         ))}
       </div>
       {/* 全件表示済みならEndMark、まだあればIntersectionObserverのセンチネル */}
-      {hasMore ? (
-        <div ref={sentinelRef} style={{ height: 1 }} aria-hidden />
-      ) : (
-        <HistoryEndMark />
-      )}
+      {hasMore ? <div ref={sentinelRef} style={{ height: 1 }} aria-hidden /> : <HistoryEndMark />}
     </div>
   );
 }

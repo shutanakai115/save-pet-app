@@ -1,5 +1,1 @@
-export {
-  calculateGoalGaugePercent,
-  calculateSavingsProgress,
-  clampPercentage,
-} from "./progress";
+export { calculateGoalGaugePercent, calculateSavingsProgress, clampPercentage } from "./progress";

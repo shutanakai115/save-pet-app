@@ -1,10 +1,8 @@
 "use client";
 
-import { useEffect, type ReactNode } from "react";
-
-import { useSetAtom } from "jotai";
-
 import { useLiveQuery } from "@tanstack/react-db";
+import { useSetAtom } from "jotai";
+import { useEffect, type ReactNode } from "react";
 
 import { goalCollection, savingsRecordsCollection } from "@/lib/db";
 import { useMounted } from "@/lib/hooks/useMounted";
@@ -18,7 +16,9 @@ export function SavingsDataProvider({ children }: { children: ReactNode }) {
   const mounted = useMounted();
 
   // SSR ではデータ同期をスキップしてそのまま children をレンダリング
-  if (!mounted) { return <>{children}</>; }
+  if (!mounted) {
+    return <>{children}</>;
+  }
 
   return <SavingsDataSyncer>{children}</SavingsDataSyncer>;
 }
@@ -34,7 +34,9 @@ function SavingsDataSyncer({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     // rawRecords / goals どちらかがまだ未解決なら isReady を立てない
-    if (rawRecords === undefined || goals === undefined) { return; }
+    if (rawRecords === undefined || goals === undefined) {
+      return;
+    }
 
     const sorted = [...rawRecords]
       .toSorted((a, b) => b.date.localeCompare(a.date))

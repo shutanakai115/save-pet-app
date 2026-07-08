@@ -5,7 +5,6 @@
  * DB 層は text として任意の文字列を許容する設計のため、このテストでは制約・型のみを検証する。
  */
 import { randomUUID } from "node:crypto";
-
 import { Pool } from "pg";
 import { afterAll, beforeAll, describe, expect, it } from "vitest";
 

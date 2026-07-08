@@ -3,10 +3,10 @@
 import { motion } from "motion/react";
 import { useRef, useState } from "react";
 
-import { PiggyMascot } from "../PiggyMascot";
-import { SavingsEntryTrigger } from "../SavingsEntryDrawer";
 import { calculateSavingsProgress } from "@/lib/savings";
 
+import { PiggyMascot } from "../PiggyMascot";
+import { SavingsEntryTrigger } from "../SavingsEntryDrawer";
 import {
   piggyBankWrapRecipe,
   savingsAmountLabelRecipe,
