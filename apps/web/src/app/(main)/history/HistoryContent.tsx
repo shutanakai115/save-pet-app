@@ -1,6 +1,8 @@
 "use client";
 
-import { useLiveQuery } from "@tanstack/react-db";
+import { useEffect, useRef, useState } from "react";
+
+import { useAtomValue } from "jotai";
 
 import {
   groupRecordsByMonth,
@@ -8,35 +10,58 @@ import {
   MonthSection,
   MonthlySummaryCard,
 } from "@/app/(main)/_features/history";
-import { savingsRecordsCollection } from "@/lib/db";
-import { useMounted } from "@/lib/hooks/useMounted";
+import { isReadyAtom, recordsAtom, totalAmountAtom } from "@/app/(main)/_layout";
 
 import { historyContentRecipe, historyMonthSectionsRecipe } from "./history.recipe";
 
-// SSR ガード: mounted になるまで null を返す
+const INITIAL_DISPLAY_COUNT = 20;
+const LOAD_MORE_COUNT = 20;
+
 export function HistoryContent() {
-  const mounted = useMounted();
-  if (!mounted) {return null;}
-  return <HistoryContentInner />;
-}
+  const records = useAtomValue(recordsAtom);
+  const totalAmount = useAtomValue(totalAmountAtom);
+  const isReady = useAtomValue(isReadyAtom);
+  const [displayCount, setDisplayCount] = useState(INITIAL_DISPLAY_COUNT);
+  const sentinelRef = useRef<HTMLDivElement>(null);
 
-// useLiveQuery はクライアントでのみ呼ばれる
-function HistoryContentInner() {
-  const { data: records } = useLiveQuery((q) => q.from({ r: savingsRecordsCollection }));
+  useEffect(() => {
+    const sentinel = sentinelRef.current;
+    if (!sentinel) return;
 
-  const allRecords = records ?? [];
-  const totalAmount = allRecords.reduce((sum, r) => sum + r.amount, 0);
-  const monthGroups = groupRecordsByMonth(allRecords);
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          setDisplayCount((prev) => Math.min(prev + LOAD_MORE_COUNT, records.length));
+        }
+      },
+      { rootMargin: "100px" },
+    );
+
+    observer.observe(sentinel);
+    return () => observer.disconnect();
+  }, [records.length]);
+
+  if (!isReady) return null;
+
+  const displayedRecords = records.slice(0, displayCount);
+  const monthGroups = groupRecordsByMonth(displayedRecords);
+  const hasMore = displayCount < records.length;
 
   return (
     <div className={historyContentRecipe()}>
+      {/* 合計金額は表示件数に関わらず全1000件ベースで算出 */}
       <MonthlySummaryCard totalAmount={totalAmount} />
       <div className={historyMonthSectionsRecipe()}>
         {monthGroups.map(([month, monthRecords]) => (
           <MonthSection key={month} month={month} records={monthRecords} />
         ))}
       </div>
-      <HistoryEndMark />
+      {/* 全件表示済みならEndMark、まだあればIntersectionObserverのセンチネル */}
+      {hasMore ? (
+        <div ref={sentinelRef} style={{ height: 1 }} aria-hidden />
+      ) : (
+        <HistoryEndMark />
+      )}
     </div>
   );
 }

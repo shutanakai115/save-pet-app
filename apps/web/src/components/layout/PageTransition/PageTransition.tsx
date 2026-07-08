@@ -17,8 +17,7 @@ const ViewTransitionComponent =
 
 export function PageTransition({ children }: PageTransitionProps) {
   if (!ViewTransitionComponent) {
-    return;
-    <>{children}</>;
+    return <>{children}</>;
   }
   return <ViewTransitionComponent>{children}</ViewTransitionComponent>;
 }
