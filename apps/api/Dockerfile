@@ -1,27 +1,33 @@
 # Build stage
-FROM golang:1.23-alpine AS builder
+FROM node:24-alpine AS builder
 
 WORKDIR /app
 
-# Install dependencies first (for better caching)
-COPY go.mod go.sum* ./
-RUN go mod download
+RUN corepack enable && corepack prepare pnpm@10.15.0 --activate
 
-# Copy source code and build
-COPY . .
-RUN CGO_ENABLED=0 GOOS=linux go build -ldflags="-w -s" -o /api
+COPY package.json ./
+RUN pnpm install
+
+COPY tsconfig.json ./
+COPY src ./src
+RUN pnpm build && pnpm prune --prod
 
 # Production stage
-FROM alpine:3.21
+FROM node:24-alpine AS production
 
-RUN apk --no-cache add ca-certificates tzdata
+WORKDIR /app
 
-# Create non-root user for security
-RUN adduser -D -g '' appuser
+RUN addgroup -S appgroup && adduser -S appuser -G appgroup
+
+ENV NODE_ENV=production
+ENV PORT=8080
+
+COPY --from=builder /app/package.json ./
+COPY --from=builder /app/node_modules ./node_modules
+COPY --from=builder /app/dist ./dist
+
 USER appuser
-
-COPY --from=builder /api /api
 
 EXPOSE 8080
 
-CMD ["/api"]
+CMD ["node", "dist/index.js"]

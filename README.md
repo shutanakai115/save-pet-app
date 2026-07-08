@@ -1,19 +1,18 @@
 # Saving Pet App
 
-Go + Next.jsのモノレポ構成アプリケーション
+Next.js + Hono のモノレポ構成アプリケーション
 
 ## 構成
 
 - **apps/web** - Next.js 15 + Panda CSS + Base UI
-- **apps/api** - Go REST APIサーバー
+- **apps/api** - Hono REST API サーバー（TypeScript）
 - **packages/** - 共有パッケージ（将来用）
 
 ## 必要要件
 
-- Node.js 20+
+- Node.js 24+
 - pnpm 10+
-- Go 1.23+
-- Docker (ローカル開発用)
+- Docker（ローカル開発用）
 
 ## 開発
 
@@ -25,6 +24,9 @@ docker compose up -d
 
 # ログ確認
 docker compose logs -f api
+
+# ヘルスチェック
+curl http://localhost:8080/health
 
 # 停止
 docker compose down
@@ -39,7 +41,7 @@ pnpm dev
 # フロントエンドのみ
 pnpm dev:web
 
-# バックエンドのみ（Goを直接実行）
+# バックエンドのみ
 pnpm dev:api
 ```
 
@@ -66,13 +68,13 @@ docker build -t saving-pet-api ./apps/api
 cd apps/web && vercel
 ```
 
-### バックエンド（Railway）
+### バックエンド（Cloud Run）
 
-1. Railwayでプロジェクト作成
-2. PostgreSQLアドオンを追加
-3. GitHubリポジトリを接続
-4. Root Directoryを `apps/api` に設定
-5. 環境変数は自動で設定される
+1. Google Cloud プロジェクトを作成
+2. Artifact Registry に Docker イメージをプッシュ
+3. Cloud Run（asia-northeast1 / 東京）にデプロイ
+4. 環境変数 `PORT` は Cloud Run が自動設定
+5. 本番 DB は Supabase（東京リージョン）の `DATABASE_URL` を設定
 
 ## その他
 
@@ -89,8 +91,8 @@ docker compose exec db psql -U postgres -d savingpet
 
 ## 環境変数
 
-`.env.example` を `.env` にコピーして設定:
+`apps/api/.env.example` を `apps/api/.env` にコピーして設定:
 
 ```bash
-cp .env.example .env
+cp apps/api/.env.example apps/api/.env
 ```

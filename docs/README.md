@@ -33,7 +33,8 @@ docs/
 | [003](./decisions/003-database-postgres.md) | データベースとしてPostgreSQLを採用 |
 | [004](./decisions/004-tanstack-db.md) | 状態管理としてTanStack DBを採用 |
 | [005](./decisions/005-schema-valibot.md) | スキーマ検証としてValibotを採用 |
-| [006](./decisions/006-go-backend-libs.md) | Goバックエンドのライブラリ選定 |
+| [006](./decisions/006-go-backend-libs.md) | Goバックエンドのライブラリ選定（却下） |
+| [007](./decisions/007-backend-nodejs-hono.md) | バックエンドをNode.js (Hono) に変更 |
 
 ## 開発フェーズ
 
@@ -46,7 +47,7 @@ docs/
    - UI コンポーネント実装
 
 3. **Phase 3: API設計・実装**
-   - Go APIエンドポイント
+   - Hono APIエンドポイント
 
 4. **Phase 4: DB設計・実装**
    - PostgreSQLスキーマ

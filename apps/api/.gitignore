@@ -1,9 +1,4 @@
-bin/
-*.exe
-*.exe~
-*.dll
-*.so
-*.dylib
-*.test
-*.out
-go.work
+node_modules/
+dist/
+.env
+*.log
