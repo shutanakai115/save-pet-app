@@ -26,6 +26,8 @@ interface SavingsEntryDrawerProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   currentTotalAmount: number;
+  /** 貯金が確定してドロワーが閉じられたときに呼ばれる */
+  onSaveComplete?: () => void;
 }
 
 const INITIAL_DATA: SavingsEntryData = {
@@ -77,14 +79,20 @@ export function SavingsEntryDrawer({
   open,
   onOpenChange,
   currentTotalAmount,
+  onSaveComplete,
 }: SavingsEntryDrawerProps) {
   const [step, setStep] = useState<SavingsEntryStep>("details");
   const [transitionDirection, setTransitionDirection] = useState<TransitionDirection>(1);
   const [frozenMinHeight, setFrozenMinHeight] = useState<number | null>(null);
   const [entryData, setEntryData] = useState<SavingsEntryData>(INITIAL_DATA);
+  const [wasSaved, setWasSaved] = useState(false);
   const stepContentRef = useRef<HTMLDivElement | null>(null);
 
   const closeAndReset = () => {
+    if (wasSaved) {
+      onSaveComplete?.();
+    }
+    setWasSaved(false);
     setTransitionDirection(1);
     setStep("details");
     setEntryData(INITIAL_DATA);
@@ -181,6 +189,7 @@ export function SavingsEntryDrawer({
                       amount: entryData.amount,
                       category: entryData.category as SavingsCategory,
                     });
+                    setWasSaved(true);
                     moveToStep("success");
                   }}
                 />
@@ -201,8 +210,26 @@ export function SavingsEntryDrawer({
   );
 }
 
-export function SavingsEntryTrigger({ currentTotalAmount }: { currentTotalAmount: number }) {
-  const [open, setOpen] = useState(false);
+interface SavingsEntryTriggerProps {
+  currentTotalAmount: number;
+  /** 外部から open 状態を制御する場合に指定 */
+  open?: boolean;
+  /** 外部から open 状態を制御する場合に指定 */
+  onOpenChange?: (open: boolean) => void;
+  /** 貯金が確定してドロワーが閉じられたときに呼ばれる */
+  onSaveComplete?: () => void;
+}
+
+export function SavingsEntryTrigger({
+  currentTotalAmount,
+  open: externalOpen,
+  onOpenChange: externalOnOpenChange,
+  onSaveComplete,
+}: SavingsEntryTriggerProps) {
+  const [internalOpen, setInternalOpen] = useState(false);
+  const isControlled = externalOpen !== undefined;
+  const open = isControlled ? (externalOpen ?? false) : internalOpen;
+  const setOpen = isControlled ? (externalOnOpenChange ?? (() => {})) : setInternalOpen;
 
   return (
     <>
@@ -213,6 +240,7 @@ export function SavingsEntryTrigger({ currentTotalAmount }: { currentTotalAmount
         open={open}
         onOpenChange={setOpen}
         currentTotalAmount={currentTotalAmount}
+        onSaveComplete={onSaveComplete}
       />
     </>
   );

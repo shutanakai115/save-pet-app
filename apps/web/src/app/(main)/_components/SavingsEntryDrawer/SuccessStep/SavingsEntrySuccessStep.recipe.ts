@@ -34,7 +34,7 @@ export const savingsEntrySuccessAmountRecipe = cva({
   base: {
     fontSize: "4xl",
     fontWeight: "900",
-    lineHeight: "1",
+    lineHeight: "1.25",
     color: "primary.600",
     letterSpacing: "-0.02em",
   },

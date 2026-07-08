@@ -108,6 +108,7 @@ export const piggyBankWrapRecipe = cva({
     height: "56",
     display: "grid",
     placeItems: "center",
+    marginTop: "4",
   },
 });
 

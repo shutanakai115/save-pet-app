@@ -1,10 +1,11 @@
 "use client";
 
 import { motion } from "motion/react";
+import { useRef, useState } from "react";
 
+import { PiggyMascot } from "../PiggyMascot";
 import { SavingsEntryTrigger } from "../SavingsEntryDrawer";
 import {
-  piggyPlaceholderRecipe,
   piggyBankWrapRecipe,
   savingsAmountLabelRecipe,
   savingsAmountRowRecipe,
@@ -38,10 +39,22 @@ function clampPercentage(value: number): number {
 }
 
 export function SavingsHero({ totalAmount, goalAmount }: SavingsHeroProps) {
+  const [drawerOpen, setDrawerOpen] = useState(false);
+  const [celebrating, setCelebrating] = useState(false);
+  const celebrateTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
   const safeTotal = Number(totalAmount) || 0;
   const safeGoal = Number(goalAmount) || 0;
   const progress =
     safeGoal > 0 ? clampPercentage((safeTotal / safeGoal) * 100) : 0;
+
+  const handleSaveComplete = () => {
+    setCelebrating(true);
+    if (celebrateTimerRef.current) {
+      clearTimeout(celebrateTimerRef.current);
+    }
+    celebrateTimerRef.current = setTimeout(() => setCelebrating(false), 1400);
+  };
 
   return (
     <section className={savingsHeroRecipe()} aria-label="貯金概要">
@@ -67,15 +80,19 @@ export function SavingsHero({ totalAmount, goalAmount }: SavingsHeroProps) {
         </div>
       </div>
 
-      <div className={piggyBankWrapRecipe()} aria-hidden="true">
-        <div className={piggyPlaceholderRecipe()}>
-          キャラクター画像
-          <br />
-          プレースホルダー
-        </div>
+      <div className={piggyBankWrapRecipe()}>
+        <PiggyMascot
+          celebrating={celebrating}
+          onClick={() => setDrawerOpen(true)}
+        />
       </div>
 
-      <SavingsEntryTrigger currentTotalAmount={safeTotal} />
+      <SavingsEntryTrigger
+        currentTotalAmount={safeTotal}
+        open={drawerOpen}
+        onOpenChange={setDrawerOpen}
+        onSaveComplete={handleSaveComplete}
+      />
     </section>
   );
 }
